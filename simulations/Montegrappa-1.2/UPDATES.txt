@@ -1,0 +1,62 @@
+
+                 ,/k.
+                /  ih,              *MonteGrappa*
+           ,-' ,  `:7b                      v1.1
+         _.-/   '  /b.`.4p,
+      --   ,    ,-' ^6x, `.'^=._
+
+=================================================
+	NEW FEATURES AND UPDATES 
+=================================================
+
+
++) The functions needed to work with several chains are now properly implemented
+ 
++) SHELLS
+
+This routine implements a neighbour-lists algorithm, based on the distance between atoms.
+The number of pairwise interactions computed during each MC step can be reduced, leading to a speedup in terms of computing time.
+
+To enable this feature, three new parameters must be included in the parameter file (.par)
+
+- shell 1          -> to enable the feature
+- nshell [int]     -> to set up the shell updates (every [int] steps)  
+- r2shell [double] -> to specify the shell radius
+
+[ Example ]
+
+shell	1
+nshell	1000
+r2shell	6.0
+
+ 
++) ROTATION MOVE
+
+This new move performs rotations around a random axis (x,y,z) passing through the center-of-mass of the chain (fastly computed on the backbone atoms coordinates).
+
+The move can be performed adding the keyword "moverot" in the parameter file (.par) 
+
+- moverot [int]
+
+The move amplitude can be modified acting on the value of "dtheta" 
+- dtheta [double]
+
+[ Example ]
+
+moverot	100
+dtheta	0.25 
+
++) LOCAL MOVE
+
+This new move performs local updates. A loose constraint is applied to a multiple pivot, generated from a collection of torsional angles sampled from
+a conformational-biased gaussian distribution (Giorgio Favrin, Anders Irbäck, Fredrik Sjunnesson "Monte Carlo Update for Chain Molecules: Biased Gaussian Steps in Torsional Space" J. Chem. Phys. 114 (2001) 8154-8158).
+
+To enable the move, add to the parameter file (.par)
+
+-movebias [int]    
+-nmul_local [int]  -> local segment length
+-bgs_a	[double]   -> an amplitude parameter
+-bgs_b	[double]   -> a parameter to control the bias degree
+
+
+

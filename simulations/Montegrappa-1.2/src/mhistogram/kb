@@ -1,0 +1,130 @@
+io.c:	if (p->debug>0)
+io.c:		fprintf(stderr,"Reading histogram from %s (columns %d, %d)\n",p->nfile[itemp],p->ncol1[itemp],p->ncol2[itemp]);
+io.c:	fp = fopen(p->nfile[itemp],"r");
+io.c:	for (i=0;i<p->ncol1[itemp]-1;i++)
+io.c:	for (i=p->ncol1[itemp];i<p->ncol2[itemp]-1;i++)
+io.c:	if (p->debug>0)
+io.c:	if (p->debug>0)
+io.c:	if (p->debug>0) fprintf(stderr,"Read row data from file %s\n",p->nfile[itemp]);
+io.c:	fp = fopen(p->nfile[itemp],"r");
+io.c:	for (i=0;i<p->ncol1[itemp]-1;i++)
+io.c:	if (p->debug>0)
+io.c:	if (p->debug>0)
+io.c:	if (p->ebin != 0) ebin = p->ebin;		// given as input
+io.c:	if (p->debug>0)
+io.c:	for (it=0;it<p->ntemp;it++)
+io.c:			h = exp(-(e-media)*(e-media)/(2.*sigma*sigma)) * exp(-e / p->temp[it]);
+io.c:			fprintf(fout,"%lf\t%lf\n",p->ebin * ie,h);
+io.c:		strcpy(p->nfile[it],nfile);
+io.c:		p->ncol1[it]=1;
+io.c:		p->ncol2[it]=2;
+io.c:		printf("\t%lf\t\t%lf\n",p->temp[it],em/z);
+mhistogram.c:	h_tmp = AlloHisto(p->ntemp,NBINMAX);
+mhistogram.c:	if (p->test) Test(p);
+mhistogram.c:	if (!p->nohisto)							// if you already have histograms
+mhistogram.c:	   for (i=0;i<p->ntemp;i++)
+mhistogram.c:		for (i=0;i<p->ntemp;i++)
+mhistogram.c:	if (p->thresh>0)
+mhistogram.c:	if (strcmp(p->nfene,""))
+mhistogram.c:			fout = fopen(p->nfene,"w");
+mhistogram.c:			PrintAverageEnergies(fout,h,p->temp,p->ntemp);
+mhistogram.c:	n = AlloInt(p->ntemp);									// vector for permutation of temperatures
+mhistogram.c:	hh = AlloDoubleMat(p->ntemp,h->nbin);					// MHistogram wants double **
+mhistogram.c:	for (i=0;i<p->ntemp;i++)								// copy histogram to double ** and reorder temperatures
+mhistogram.c:	t = AlloDouble(p->ntemp);								// temperature vector
+mhistogram.c:	for (i=0;i<p->ntemp;i++)
+mhistogram.c:		t[n[i]] = p->temp[i];
+mhistogram.c:	if (strcmp(p->nfz,""))
+mhistogram.c:		if (p->debug>0) fprintf(stderr,"Wants to print -log(Z) to %s.\n",p->nfz);
+mhistogram.c:		ff = fopen(p->nfz,"w");
+mhistogram.c:	lg = MHistogram(hh,t,p->ntemp,h->nbin,h->emin,h->ebin,p->debug,p->kb,NULL,NULL,p->paranoid,p->ignoreb,ff,p->deltat,binok);
+mhistogram.c:	therm = AlloDoubleMat(4,p->ntout);
+mhistogram.c:	CalculateThermodynamics(lg,h->emin,h->ebin,h->nbin,p->tminout,p->tbinout,p->ntout,therm,p->kb,NULL,NULL,binok);
+mhistogram.c:	if (!strcmp(p->nfout,"STDOUT"))
+mhistogram.c:		fout = fopen(p->nfout,"w");
+mhistogram.c:	if (p->debug>0) fprintf(stderr,"Printing thermodynamics to %s [columns: E <E>  sigma_E  Cv F]\n",p->nfout);
+mhistogram.c:	PrintThermodynamics(fout,therm,p->tminout,p->tbinout,p->ntout);
+mhistogram.c:	if (strcmp(p->nfout,"STDOUT")) fclose(fout);
+mhistogram.c:	if (strcmp(p->nfg,""))
+mhistogram.c:		if (p->debug>0) fprintf(stderr,"Printing density of state to %s [columns: E log(g(E))]\n",p->nfg);
+mhistogram.c:		fout = fopen(p->nfg,"w");
+mhistogram.c:	strcpy(p->title,"");
+mhistogram.c:	strcpy(p->nfout,"STDOUT");
+mhistogram.c:	strcpy(p->nfene,"");
+mhistogram.c:	strcpy(p->nfene,"dumb_e.dat");
+mhistogram.c:	strcpy(p->nfg,"");
+mhistogram.c:	p->ntemp=0;
+mhistogram.c:	p->thresh=0;
+mhistogram.c:	p->nohisto=0;
+mhistogram.c:	p->ebin=0;
+mhistogram.c:	p->tminout=0;
+mhistogram.c:	p->debug=0;
+mhistogram.c:	p->tbinout=1;
+mhistogram.c:	p->ntout=200;
+mhistogram.c:	p->test=0;
+mhistogram.c:	p->ncol2[0]=0;
+mhistogram.c:	p->kb=1;
+mhistogram.c:	p->paranoid=0;
+mhistogram.c:	p->ignoreb=0;
+mhistogram.c:	p->deltat=0;
+mhistogram.c:	p->emin = 0;
+mhistogram.c:	p->femin = 0;
+mhistogram.c:        if ( !sscanf(aux,"title %s",p->title) ) Error("Cannot read title in inputfile");
+mhistogram.c:        if ( !sscanf(aux,"ntemp %d",&p->ntemp) ) Error("Cannot read ntemp in inputfile");
+mhistogram.c:         if ( !sscanf(aux,"ebin %lf",&p->ebin) ) Error("Cannot read ebin in inputfile");
+mhistogram.c:         if ( !sscanf(aux,"emin %lf",&p->emin) ) Error("Cannot read ebin in inputfile");
+mhistogram.c:         p->femin=1;
+mhistogram.c:       if (!strncmp(aux,"nohisto",7)) p->nohisto=1;
+mhistogram.c:    	   if ( !sscanf(aux,"ignoreb %d",&p->ignoreb) ) Error("Cannot read ignoreb in inputfile");
+mhistogram.c:    	   if (!p->ntemp) Error("ntemp must be defined before the list of files.");
+mhistogram.c:    	   for (i=0;i<p->ntemp;i++)
+mhistogram.c:    	     if ( fscanf(fin,"%s %lf %d %d",p->nfile[i],&p->temp[i],&p->ncol1[i],&p->ncol2[i]) < 3)
+mhistogram.c:					 fprintf(stderr,"file=%s temp=%lf col1=%d col2=%d\n",p->nfile[i],p->temp[i],p->ncol1[i],p->ncol2[i]);
+mhistogram.c:               if ( !sscanf(aux,"threshold %lf",&p->thresh) ) Error("Cannot read threshold in inputfile");
+mhistogram.c:           if (sscanf(aux,"debug %d",&p->debug)!=1) p->debug = 1;
+mhistogram.c:               if ( !sscanf(aux,"outfile %s",p->nfout) ) Error("Cannot read outfile in inputfile");
+mhistogram.c:               if ( !sscanf(aux,"enefile %s",p->nfene) ) Error("Cannot read enefile in inputfile");
+mhistogram.c:                     if ( !sscanf(aux,"gfile %s",p->nfg) ) Error("Cannot read gfile in inputfile");
+mhistogram.c:                      if ( !sscanf(aux,"zfile %s",p->nfz) ) Error("Cannot read zfile in inputfile");
+mhistogram.c:          if ( !sscanf(aux,"tmin %lf",&p->tminout) ) Error("Cannot read tmin in inputfile");
+mhistogram.c:           if ( !sscanf(aux,"tbin %lf",&p->tbinout) ) Error("Cannot read tmin in inputfile");
+mhistogram.c:           if ( !sscanf(aux,"ntbin %d",&p->ntout) ) Error("Cannot read ntbin in inputfile");
+mhistogram.c:            if ( !sscanf(aux,"kb %lf",&p->kb) ) Error("Cannot read kb in inputfile");
+mhistogram.c:       if (!strncmp(aux,"test",4)) p->test=1;
+mhistogram.c:       if (!strncmp(aux,"paranoid",8)) p->paranoid=1;
+mhistogram.c:              if ( !sscanf(aux,"deltat %lf",&p->deltat) ) Error("Cannot read deltat in inputfile");
+mhistogram.c:	if (p->ntemp==0) Error("Number of temperatures is set to zero");
+mhistogram.c:	if (p->nohisto==1 && p->ncol2[0]!=0) Error("You specified two columns to read row data. You need only one.");
+mhistogram.c:	if (p->debug>0) fprintf(stderr,"Debug level =\t\t%d\n",p->debug);
+mhistogram.c:	if (p->debug>0)
+mhistogram.c:		fprintf(stderr,"title = \t%s\n",p->title);
+mhistogram.c:		fprintf(stderr,"ntemp = \t%d\n",p->ntemp);
+mhistogram.c:		fprintf(stderr,"ebin = \t\t%lf\n",p->ebin);
+mhistogram.c:		if (p->femin==1) fprintf(stderr,"emin = \t\t%lf\n",p->emin);
+mhistogram.c:		fprintf(stderr,"thresh = \t%lf\n",p->thresh);
+mhistogram.c:		fprintf(stderr,"tmin = \t\t%lf\n",p->tminout);
+mhistogram.c:		fprintf(stderr,"tbin = \t\t%lf\n",p->tbinout);
+mhistogram.c:		fprintf(stderr,"#tbin = \t%d\n",p->ntout);
+mhistogram.c:		fprintf(stderr,"Kb = \t\t%lf\n",p->kb);
+mhistogram.c:		if (p->ignoreb) fprintf(stderr,"Ignore temperatures which prevent equation solving\n");
+misc.c:  if (p->debug>0) fprintf(stderr,"\nRebin histograms\n");
+misc.c:  for (i=0;i<p->ntemp;i++)
+misc.c:	    if (p->ebin != 0) ebintot = p->ebin;						// set ebin from input...
+misc.c:	    if (p->debug>1) fprintf(stderr," t=%d\tmin=%lf\tmax=%lf\tbin=%lf\tnbin=%d\n",
+misc.c:  if (p->femin==1) emintot = p->emin;
+misc.c:  if (p->debug>0) fprintf(stderr," global\tmin=%lf\tmax=%lf\tbin=%lf\tnbin=%d\n",
+misc.c:  new = AlloHisto(p->ntemp,nbintot+1);
+misc.c:  for (i=0;i<p->ntemp;i++)
+misc.c:  for (i=0;i<p->ntemp;i++)
+misc.c:	  if (p->debug>2)
+misc.c:  for (i=0;i<p->ntemp;i++) n[i]=i;
+misc.c:  for (i=0;i<p->ntemp-1;i++)
+misc.c:    for (j=i+1;j<p->ntemp;j++)
+misc.c:      if ( p->temp[n[i]] < p->temp[n[j]] )
+misc.c:  if (p->debug>0) fprintf(stderr,"\nReoredering temperatures\n new order: ");
+misc.c:  if (p->debug>0)
+misc.c:	  for (i=0;i<p->ntemp;i++) fprintf(stderr,"%lf ",p->temp[n[i]]);
+misc.c:  if (p->debug>0) fprintf(stderr,"\n");
+misc.c:   for (i=0;i<p->ntemp;i++)
+misc.c:		   if ( ((h+i)->histo)[j] < p->thresh  ) ((h+i)->histo)[j] =0;
+misc.c:	   if (z<EPSILON) fprintf(stderr,"\nWARNING: histogram at T=%lf contains no data after thresholding\n\n",p->temp[i]);

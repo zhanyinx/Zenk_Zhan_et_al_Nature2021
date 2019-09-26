@@ -1,0 +1,21 @@
+nchains		1
+nrun		200
+Temp		1
+nstep		50000000
+nprinttrj	10000
+nprinte		10000
+nprintlog	10000
+flip		1
+chi2start		0
+pivot		10
+seed		-1
+traj		chrX.12000000.15800000
+nosidechain
+nodihpot
+noangpot
+op_minim	sample
+op_file		chrX.12000000.15800000.op
+op_deltat	100000
+op_itermax	4000
+op_step		0.1
+op_T		1.0

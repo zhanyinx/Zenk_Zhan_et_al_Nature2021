@@ -1,0 +1,19 @@
+nchains         1
+nstep           10000000
+seed            42
+nprinttrj       10000
+nprintlog       10000
+nprinte         10000
+mpivot           1
+pivot	4
+step_exchange 1000
+ntemp	8
+temperatures	
+0.4
+0.6
+0.8
+1.0
+1.2
+1.4
+1.6
+1.8

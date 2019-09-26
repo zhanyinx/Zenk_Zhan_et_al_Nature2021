@@ -1,0 +1,23 @@
+outfile results.dat
+
+
+ntemp	8
+files
+
+energy_cut0.ene 0.4 2
+energy_cut1.ene 0.6 2
+energy_cut2.ene 0.8 2
+energy_cut3.ene 1.0 2
+energy_cut4.ene 1.2 2
+energy_cut5.ene 1.4 2
+energy_cut6.ene 1.6 2
+energy_cut7.ene 1.8 2
+
+
+nohisto
+
+debug	1
+
+tmin	0.4
+tbin	0.014
+ntbin	100

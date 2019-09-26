@@ -1,0 +1,62 @@
+
+/*********************************************************************\
+| TUTORIAL N. 3: parallel tempering w/o optimization of the potential |
+\*********************************************************************/
+
+
+Now we will use the MPI-version of MonteGrappa to run a short parallel
+tempering simulation of a small hairpin, namely residues 41-56 of protein G
+(1PGB.pdb), and calculate its specific heat as a function of the temperature 
+
+
+Run
+	/path/where/is/grappino hairpin.in
+
+
+to create hairpin.pol and hairpin.pot; then run the MPI-version of MonteGrappa
+	mpirun -np 8 /path/where/is/montegrappa_mpi hairpin.pol hairpin.pot hairpin.par 
+
+
+At the end of the simulation, you should have lots of files in your directory: 
+- energy_procN.ene
+- last_procN.pol
+- traj_procN.pdb
+where N is the index of the replica (0-7 in this tutorial). 
+
+
+To calculate the specific heat of our hairpin, we need to use the energies of 
+each replica. Then, have a look at the energies, e.g. with 
+	gnuplot
+	gnuplot> p "energy_proc0.ene" w l, "energy_proc3.ene" w l, "energy_proc7.ene" w l
+
+
+To be sure we will use equilibrium energies, we choose to cut out the first 
+10% of the results, namely 100 entries out of 1000:
+
+	sed -e '1,100d' energy_proc0.ene > energy_cut0.ene
+
+this having to be made for each replica.
+Now there should be 8 new files in this directory, 
+energy_cut0.ene
+energy_cut1.ene
+..
+energy_cut7.ene
+
+
+Now we can run the routine mhistogram by using the input file mhistogram.in
+(The help of mhistogram can be obtain simply digiting
+	./mhistogram
+without any parameter)
+
+	/path/where/is/mhistogram mhistogram.in
+
+
+Have a look at the results:
+	gnuplot
+	gnuplot> p "results.dat" w l, "dumb_e.dat" w lp
+
+to visually check the fit of energies vs temperature with a sigma function; then
+
+	gnuplot> p "results.dat" u 1:4 w l
+
+to visualize also the specific heat. 

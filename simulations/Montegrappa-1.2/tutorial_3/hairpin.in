@@ -1,0 +1,48 @@
+##############################
+# Grappino input file sample #
+##############################
+
+#########
+# Input #
+#########
+
+pdbfile         hairpin.pdb	# path of pdb file
+
+
+###########
+# Polymer #
+###########
+
+#rotamers
+#rotfile		/home/fran/MonteGrappa-1.0/MonteGrappa-alpha/lib/rotamers.lib
+pdb_rot
+backbone_atoms	3 N CA C	# number and name of backbone file
+#nosidechain                       
+atomtypes	go
+
+
+#############
+# Potential #
+#############
+
+
+imin		3               
+	
+potential	go
+r_hardcore	1.0
+r_native	3.0
+go-energy	-1.5
+
+go_dihedrals                      
+e_dih1		2.7             
+e_dih3		0.9          
+
+
+##########
+# Output #
+##########
+
+debug		1	# set the verbosity level
+
+polfile         hairpin.pol	# polymer file
+potfile         hairpin.pot	# potential file

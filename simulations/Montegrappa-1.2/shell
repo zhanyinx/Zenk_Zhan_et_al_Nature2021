@@ -1,0 +1,912 @@
+src/energy.c:	if (parms->go_noise) 
+src/energy.c:		fprintf(stderr,"Adding noise (kind %d, sigma=%lf) to the Go potential\n",parms->go_noise,parms->go_noise_sigma);
+src/energy.c:	if (parms->debug>1)  fprintf(stderr,"\n\nGo contacts:\n");
+src/energy.c:				e[i][j] = parms->goe;
+src/energy.c:				if (parms->go_noise) e[i][j] += gauss(0.,parms->go_noise_sigma);	// if you want to add noise to the go potential
+src/energy.c:				if (parms->use_nativedist) r = cm[i][j] * cm[i][j] * parms->k_native_r * parms->k_native_r;
+src/energy.c:				else r = parms->rnat * parms->rnat;
+src/energy.c:				if (parms->use_nativedist) r = cm[i][j] * cm[i][j] * parms->k_native_hc * parms->k_native_hc;
+src/energy.c:				else r = parms->rhard * parms->rhard;
+src/energy.c:				if (parms->debug>1)  fprintf(stderr,"%d-%d\t",i,j);
+src/energy.c:			if (parms->go_noise==2)								// if you want to add non-go noise
+src/energy.c:				e[i][j] = gauss(0.,parms->go_noise_sigma);
+src/energy.c:				r2[i][j] =  parms->rnat * parms->rnat;
+src/energy.c:				r02[i][j] = parms->rhard * parms->rhard;
+src/energy.c:	if (parms->debug>1)  fprintf(stderr,"\n");
+src/energy.c:	if (strcmp(parms->cntfile,""))
+src/energy.c:		fout = fopen(parms->cntfile,"w");
+src/energy.c:	if (parms->debug>0) fprintf(stderr,"Found %d Go contacts\n",k);
+src/energy.c:			u->e_dih1[ia] = parms->e_dih1;
+src/energy.c:			u->e_dih3[ia] = parms->e_dih3;
+src/energy.c:			u->e_ang[ia] = parms->e_ang;
+src/energy.c:					if (c1!=c2 || ib1<=ib2-parms->imin)
+src/energy.c:						if ( d < parms->rnat )
+src/energy.c:							if ( d < parms->rnat )
+src/energy.c:							if ( d < parms->rnat )
+src/energy.c:								if ( d < parms->rnat )
+src/energy.c:													e[it1][it2] = parms->cys;
+src/energy.c:													r2[it1][it2] = parms->cysr * parms->cysr;
+src/energy.c:														r02[it1][it2] = parms->rhard;
+src/energy.c:			if (parms->hydro_at[i]==1 && parms->hydro_at[j]==1)
+src/energy.c:				e[i][j] = parms->hydro_e;
+src/energy.c:				r2[i][j] = parms->hydro_r * parms->hydro_r;
+src/energy.c:					r02[i][j] = parms->rhard;
+src/geometry.c:	dt = 2. * mc_parms->dw_flip * (frand() - 0.5);
+src/geometry.c:	dt = 2. * mc_parms->dw_flip * (frand() - 0.5);
+src/io.c:	fprintf(parms->flog,"Read potential from %s\n",fname);
+src/io.c:			if (parms->noangpot) 
+src/io.c:			if (parms->nodihpot) 
+src/io.c:			if (parms->nodihpot) 
+src/io.c:			if (parms->nodihpot) 
+src/io.c:			if (parms->nodihpot) 
+src/io.c:			if (parms->nodihpot) 
+src/io.c:	    		fprintf(parms->flog,"Global hardcore = %lf\n",u->g_r0hard);
+src/io.c:	    		fprintf(parms->flog,"Global imin = %d\n",u->g_imin);
+src/io.c:	    		fprintf(parms->flog,"Energy tabled dih = %lf\n",u->g_dihe);
+src/io.c:	    		fprintf(parms->flog,"Bin tabled dih = %lf\n",u->g_dihbin);
+src/io.c:	    		fprintf(parms->flog,"Global homopolymeric interaction = %lf (r=%lf)\n",u->g_ehomo,u->g_rhomo);
+src/io.c:	    	    fprintf(parms->flog,"Global angular potential: k=%lf ang0=%lf\n",u->g_anglek,u->g_angle0);
+src/io.c:	    		fprintf(parms->flog,"Global dihedral potential: k=%lf dih0=%lf n=1\n",u->g_dihk1,u->g_dih01);
+src/io.c:	    		fprintf(parms->flog,"Global dihedral potential: k=%lf dih0=%lf n=3\n",u->g_dihk3,u->g_dih03);
+src/io.c:					fprintf(parms->flog,"Global energy ramachandran dihedral: e_dihram=%lf\n",u->e_dihram);
+src/io.c:		    		fprintf(parms->flog,"Splice energy well into two parts (kr=%lf ke=%lf)\n",kr_splice,u->ke_splice);
+src/io.c:	if (k==0) fprintf(parms->flog,"WARNING: no pair interaction read in potential file.\n");
+src/io.c:	else fprintf(parms->flog,"Read %d pair interaction in potential file\n",k);
+src/io.c:	for(ipol=0;ipol<parms->npol;ipol++)
+src/local_move.c:	for(i=0;i<parms->npol;i++)
+src/local_move.c:	        FreeDoubleMatrix((fragment+i)->A,parms->nmul_local);
+src/local_move.c:                FreeDoubleMatrix((fragment+i)->G,parms->nmul_local);
+src/local_move.c:                FreeDoubleMatrix((fragment+i)->L,parms->nmul_local);
+src/local_move.c:                FreeDoubleMatrix((fragment+i)->Y,parms->nmul_local);
+src/local_move.c:	ip=irand(parms->npol);
+src/local_move.c:			(fragment+ip)->d_ang[i]=parms->dw_mpivot*(0.05-frand());
+src/local_move.c:		if (!parms->nodihpot)
+src/local_move.c:		if(!parms->nosidechains)
+src/local_move.c:		deltaE += EnergyMonomerRange(p,pot,iw-nmul+1,iw+1,ip,parms->npol,parms->shell,1,parms->nosidechains,parms->disentangle,parms->hb);
+src/local_move.c:		if (!parms->nodihpot)
+src/local_move.c:			UpdateMonomerRange(oldp,p,iw-nmul+1,iw+1,ip,parms->shell);
+src/local_move.c:                	UpdateMonomerRange(p,oldp,iw-nmul+1,iw+1,ip,parms->shell);
+src/local_move.c:                	parms->acc++;
+src/local_move.c:                        (fragment+ip)->d_ang[i]=parms->dw_mpivot*(0.05-frand());
+src/local_move.c:                if (!parms->nodihpot)
+src/local_move.c:		if(!parms->nosidechains)	ok=AddSidechain(p,0,iw+1,ip);
+src/local_move.c:               deltaE += EnergyMonomerRange(p,pot,0,iw+1,ip,parms->npol,parms->shell,1,parms->nosidechains,parms->disentangle,parms->hb);
+src/local_move.c:                if (!parms->nodihpot)
+src/local_move.c:		       UpdateMonomerRange(oldp,p,0,iw+1,ip,parms->shell);
+src/local_move.c:                        UpdateMonomerRange(p,oldp,0,iw+1,ip,parms->shell);
+src/local_move.c:                        parms->acc++;
+src/local_move.c:		MatA((fragment+ip)->A,(fragment+ip)->G,nang,parms->bgs_a,parms->bgs_b);
+src/local_move.c:		if(!parms->nodihpot)
+src/local_move.c:			if(!parms->noangpot)
+src/local_move.c:		double rc2=parms->r_cloose*parms->r_cloose;
+src/local_move.c:			if(!parms->nosidechains)
+src/local_move.c:			deltaE += EnergyMonomerRange(p,pot,iw-nmul+1,iw+1,ip,parms->npol,parms->shell,1,parms->nosidechains,parms->disentangle,parms->hb);
+src/local_move.c:			if (!parms->nodihpot)
+src/local_move.c:                  	if(!parms->noangpot)
+src/local_move.c: 	          	MatA((fragment+ip)->A,(fragment+ip)->G,nang,parms->bgs_a,parms->bgs_b);
+src/local_move.c:      				UpdateMonomerRange(oldp,p,iw-nmul+1,iw+1,ip,parms->shell);
+src/local_move.c:                	        UpdateMonomerRange(p,oldp,iw-nmul+1,iw+1,ip,parms->shell);
+src/local_move.c:		                parms->acc++;
+src/local_move.c:	        	UpdateMonomerRange(oldp,p,iw-nmul+1,iw+1,ip,parms->shell);
+src/local_move.c:	parms->mov++;
+src/mc.c:	if(parms->shell==1)
+src/mc.c:		parms->ishell=0;
+src/mc.c://	if (parms->stempering) st_p = parms->p;
+src/mc.c:	int my_rank=mpiparms->my_rank;
+src/mc.c:	MPI_Datatype Backtype=mpiparms->Back_mpi;
+src/mc.c:        MPI_Datatype Sidetype=mpiparms->Side_mpi;
+src/mc.c:        MPI_Datatype Rottype=mpiparms->Rot_mpi;
+src/mc.c:        MPI_Status astatus=mpiparms->astatus;
+src/mc.c:	int ex_count[(parms->ntemp)-1],ex_acc[(parms->ntemp)-1];
+src/mc.c:        t=parms->T[my_rank];
+src/mc.c:	t=parms->T;
+src/mc.c:		fprintf(stderr,"rank %d\t temperature = %lf\n",i,parms->T[i]);
+src/mc.c:	if (parms->debug>0)
+src/mc.c:	if (parms->debug>1)
+src/mc.c:		fprintf(stderr,"Moves = %d %d %d %d\n",parms->movetype[0],parms->movetype[1],
+src/mc.c:				parms->movetype[2],parms->movetype[3]);
+src/mc.c:		for (ci=0;ci<parms->npol;ci++)
+src/mc.c:	CopyAllPolymers(p,oldp,parms->npol,parms->nosidechains,parms->nosidechains);
+src/mc.c:	parms->acc = 0;
+src/mc.c:	parms->mov = 0;
+src/mc.c:      //for (i=0;i<(parms->ntemp)-1;i++) { ex_count[i]=0; ex_acc[i]=0;}
+src/mc.c:                        if (strcmp(parms->op_minim,"none")  && ok>-1){
+src/mc.c:                        if (parms->stempering){
+src/mc.c:                        if ((parms->p)->st_ttarget_harvest==1 && st_iprint>=(parms->p)->st_printpdb && t <= (parms->p)->st_ttarget + EPSILON && (parms->p)->st_nm==1)
+src/mc.c:                                       //        (parms->nstep-parms->op_wait)/parms->op_deltat,p->etot,parms->T[my_rank]);
+src/mc.c:                                       //       (parms->nstep-parms->op_wait)/parms->op_deltat,p->etot,parms->T);
+src/mc.c:                                        TotalEnergy(p,pot,parms,parms->npol,0,parms->nosidechains,parms->debug,my_rank);      // record energy
+src/mc.c:                                        OP_GetRestrain(op->nframes,p,0,parms->op_input);            // record restrains
+src/mc.c:                                        op->t[op->nframes] = parms->T[my_rank];
+src/mc.c:                                        op->t[op->nframes] = parms->T;
+src/mc.c:					if ((parms->p)->st_ttarget_harvest>0 && ok>-1 && t <= (parms->p)->st_ttarget + EPSILON ) st_iprint ++;
+src/mc.c:                                         if (st_o == 1) t = (parms->p)->st_temp[(parms->p)->st_itemp];
+src/mc.c:                                else if (op->icount == parms->op_deltat)
+src/mc.c:				if (op->icount == parms->op_deltat)
+src/mc.c:                                               (parms->nstep-parms->op_wait)/parms->op_deltat,p->etot,parms->T[my_rank]);
+src/mc.c:                                               (parms->nstep-parms->op_wait)/parms->op_deltat,p->etot,parms->T);
+src/mc.c:                                        TotalEnergy(p,pot,parms,parms->npol,0,parms->nosidechains,parms->debug,my_rank);      // record energy
+src/mc.c:                                        OP_GetRestrain(op->nframes,p,0,parms->op_input);            // record restrains
+src/mc.c:                                        op->t[op->nframes] = parms->T[my_rank];
+src/mc.c:                                        op->t[op->nframes] = parms->T;
+src/mc.c:                                if (istep >= parms->op_wait)
+src/mc.c:		if (parms->debug>1)
+src/mc.c:		if (mcount[0] == parms->movetype[0])						// flip of backbone
+src/mc.c:			ok = MoveBackboneFlip(p,oldp,parms,pot,istep,parms->debug,t);
+src/mc.c:		if (mcount[1] == parms->movetype[1])						// pivot of backbone
+src/mc.c:		if (mcount[2] == parms->movetype[2])						// multiple pivot of backbone
+src/mc.c:			ok = MoveMultiplePivot(p,oldp,pot,parms->nmul_mpivot,parms,t);
+src/mc.c:		if (mcount[3] == parms->movetype[3])						// move of sidechain
+src/mc.c:			ok = MoveSidechain(p,oldp,parms,pot,istep,parms->debug,t);
+src/mc.c:		if (mcount[4] == parms->movetype[4])						// loose pivot
+src/mc.c:			ok = MoveLoosePivot(p,oldp,pot,parms->nmul_lpivot,parms,t);
+src/mc.c:		if (mcount[5] == parms->movetype[5])						// multiple flip
+src/mc.c:			ok = MoveMultipleFlip(p,oldp,parms,pot,istep,parms->debug,t);
+src/mc.c:		if (mcount[6] == parms->movetype[6])						// move of center of mass
+src/mc.c:			ok = MoveCoM(p,oldp,parms,pot,istep,parms->debug,t);
+src/mc.c:		if (mcount[7] == parms->movetype[7])
+src/mc.c:                        ok=LocalMove(p,oldp,fragment,pot,parms->nmul_local,parms,t);
+src/mc.c:		if (mcount[8] == parms->movetype[8])
+src/mc.c:                        ok=MoveRotation(p,oldp,parms,pot,istep,parms->debug,t);
+src/mc.c:		//if (parms->anneal) Anneal(parms,&t,&anneal_count,&anneal_status,&ok,&ishell,mcount);
+src/mc.c:		if (mcount[9] == parms->movetype[9])
+src/mc.c:///                        ok=MoveRotation(p,oldp,parms,pot,istep,parms->debug,t);
+src/mc.c:		       ok=MoveClusterCoM(p,oldp,parms,pot,istep,parms->debug,t,fproc,my_rank); 
+src/mc.c:		if (mcount[10] == parms->movetype[10])
+src/mc.c://                        ok=MoveRotation(p,oldp,parms,pot,istep,parms->debug,t);
+src/mc.c:			ok=MoveClusterRot(p,oldp,parms,pot,istep,parms->npol,parms->debug,t,fproc,my_rank);
+src/mc.c:		if (iprintlog == parms->nprintlog && ok>-2)
+src/mc.c:				fprintf(parms->flog,"Step = %llu\tE=%lf\tok=%d\tT=%lf\n",istep,p->etot,ok,t);
+src/mc.c://                              TotalEnergy(p,pot,parms,parms->npol,0,parms->nosidechains,parms->debug,my_rank),ok);
+src/mc.c:			PrintEnergies_Parallel(stderr,parms->npol,istep,p,my_rank);
+src/mc.c:			TotalEnergy(p,pot,parms,parms->npol,0,parms->nosidechains,parms->debug,my_rank),ok);	// energy update in Move...
+src/mc.c:			if (parms->debug>4 && ok==1)
+src/mc.c:				PrintStructure(p,parms->npol,stderr,parms->shell);
+src/mc.c:		if (ftrj != NULL && iprinttrj == parms->nprinttrj && ok>-1)
+src/mc.c:			//CountContacts(stderr,p,parms,parms->mov);			
+src/mc.c:			PrintPDBStream(p,parms->npol,ftrj);
+src/mc.c:		if (fe != NULL && iprinte == parms->nprinte && ok>-1)
+src/mc.c:			PrintEnergies(fe,parms->npol,istep,p);
+src/mc.c:		if (parms->shell==1)
+src/mc.c:			if (parms->ishell == parms->nshell && ok>-1)
+src/mc.c:				parms->ishell=0;
+src/mc.c:		if (parms->stempering)
+src/mc.c:                                 st_o = STempering(p->etot,istep,(parms->p));
+src/mc.c:				if(!strcmp(parms->op_minim,"none")){
+src/mc.c:                                if ((parms->p)->st_ttarget_harvest==1 && st_iprint>=(parms->p)->st_printpdb && t <= (parms->p)->st_ttarget + EPSILON && (parms->p)->st_nm==1)
+src/mc.c:                                        PrintPDBStream(p,parms->npol,(parms->p)->st_pdbf);
+src/mc.c:                                        if(parms->nconf!=-1)
+src/mc.c:                                        if(nconf>parms->nconf-1){
+src/mc.c:                                        fprintf(stderr,"Reached target temperature (Ttarget=%lf).\nENDING SIMULATION\n",(parms->p)->st_ttarget);
+src/mc.c:                                 if ((parms->p)->st_ttarget_harvest>0 && ok>-1 && t <= (parms->p)->st_ttarget + EPSILON ) st_iprint ++;
+src/mc.c:                                 if (st_o == 1) t = (parms->p)->st_temp[(parms->p)->st_itemp];
+src/mc.c:                       if (strcmp(parms->op_minim,"none")  && ok>-1)
+src/mc.c:                        if (parms->stempering){
+src/mc.c:                        if ((parms->p)->st_ttarget_harvest==1 && st_iprint>=(parms->p)->st_printpdb && t <= (parms->p)->st_ttarget + EPSILON && (parms->p)->st_nm==1)
+src/mc.c:                                        //       (parms->nstep-parms->op_wait)/parms->op_deltat,p->etot,parms->T[my_rank]);
+src/mc.c:                                        //       (parms->nstep-parms->op_wait)/parms->op_deltat,p->etot,parms->T);
+src/mc.c:                                        TotalEnergy(p,pot,parms,parms->npol,0,parms->nosidechains,parms->debug,my_rank);      // record energy
+src/mc.c:                                        OP_GetRestrain(op->nframes,p,0,parms->op_input);            // record restrains
+src/mc.c:                                        op->t[op->nframes] = parms->T[my_rank];
+src/mc.c:                                        op->t[op->nframes] = parms->T;
+src/mc.c:					if ((parms->p)->st_ttarget_harvest>0 && ok>-1 && t <= (parms->p)->st_ttarget + EPSILON ) st_iprint ++;
+src/mc.c:                                         if (st_o == 1) t = (parms->p)->st_temp[(parms->p)->st_itemp];
+src/mc.c:                                else if (op->icount == parms->op_deltat)
+src/mc.c:				if (op->icount == parms->op_deltat)
+src/mc.c:                                               (parms->nstep-parms->op_wait)/parms->op_deltat,p->etot,parms->T[my_rank]);
+src/mc.c:                                               (parms->nstep-parms->op_wait)/parms->op_deltat,p->etot,parms->T);
+src/mc.c:                                        TotalEnergy(p,pot,parms,parms->npol,0,parms->nosidechains,parms->debug,my_rank);      // record energy
+src/mc.c:                                        OP_GetRestrain(op->nframes,p,0,parms->op_input);            // record restrains
+src/mc.c:                                        op->t[op->nframes] = parms->T[my_rank];
+src/mc.c:                                        op->t[op->nframes] = parms->T;
+src/mc.c:                                if (istep >= parms->op_wait)
+src/mc.c:                 if(ptempering_count==(parms->nstep_exchange)/2 && parms->ntemp>1)
+src/mc.c:                        if(parms->debug>2) 
+src/mc.c:                	ExchangePol(p,replica,oldp,parms,pot,my_rank,parms->ntemp,0,ex_count,ex_acc,Backtype,Sidetype,Rottype,astatus,istep);	
+src/mc.c:		if(ptempering_count==(parms->nstep_exchange) && parms->ntemp>1)
+src/mc.c:                        if(parms->debug>2) if(my_rank==0)
+src/mc.c:                        ExchangePol(p,replica,oldp,parms,pot,my_rank,parms->ntemp,1,ex_count,ex_acc,Backtype,Sidetype,Rottype,astatus,istep);
+src/mc.c:                        parms->ishell ++;
+src/mc.c:	} while (istep<parms->nstep && softexit==0);	
+src/mc.c:	fprintf(stderr,"\nRank %d Acceptance:\t%d / %d = %lf\n",my_rank,parms->acc,parms->mov,(double)parms->acc/parms->mov);
+src/mc.c:	fprintf(stderr,"\nAcceptance:\t%d / %d = %lf\n",parms->acc,parms->mov,(double)parms->acc/parms->mov);
+src/mc.c:	if(parms->movetype[0]!=-1)
+src/mc.c:	if(parms->movetype[1]!=-1) 
+src/mc.c:	if(parms->movetype[2]!=-1) 
+src/mc.c:	if(parms->movetype[3]!=-1) 
+src/mc.c:	if(parms->movetype[4]!=-1) 
+src/mc.c:	if(parms->movetype[5]!=-1) 
+src/mc.c:	if(parms->movetype[6]!=-1) 
+src/mc.c:	if(parms->movetype[7]!=-1)
+src/mc.c:	 if(parms->movetype[8]!=-1)
+src/mc.c:         if(parms->movetype[9]!=-1)
+src/mc.c:         if(parms->movetype[10]!=-1)
+src/mc.c:	PrintPDBStream(p,parms->npol,ftrj);
+src/mc.c:	ip = irand(parms->npol);						// which chain to move
+src/mc.c:	if (!parms->noangpot)
+src/mc.c:	if (!parms->nodihpot)
+src/mc.c:		dw = 2. * parms->dw_flip * (0.5 - frand());				// angle to flip
+src/mc.c:	if (parms->a_cloose>0)
+src/mc.c:			- (((p+ip)->back)+iw-1)->a_next) > parms->a_cloose || out==0) ok=0;
+src/mc.c:					- (((p+ip)->back)+iw+1)->a_next) > parms->a_cloose || out==0) ok=0;
+src/mc.c:	if (parms->d_cloose>0)
+src/mc.c:						- (((p+ip)->back)+iw-1)->d_next) > parms->d_cloose || out==0) ok=0;
+src/mc.c:						- (((p+ip)->back)+iw+2)->d_next) > parms->d_cloose || out==0) ok=0;
+src/mc.c:		deltaE += EnergyMonomerRange(p,pot,iw-1,iw+1,ip,parms->npol,parms->shell,1,parms->nosidechains,parms->disentangle,parms->hb);		// new energy of iw with the others
+src/mc.c:		if (!parms->noangpot)
+src/mc.c:		if (!parms->nodihpot)
+src/mc.c:		UpdateMonomerRange(oldp,p,iw-1,iw+1,ip,parms->shell);							// return to the old position, contacts, etc.
+src/mc.c:		UpdateMonomerRange(p,oldp,iw-1,iw+1,ip,parms->shell);							// update oldp
+src/mc.c:		parms->acc ++;
+src/mc.c:	//fprintf(stderr,"** %lf %lf\n",TotalEnergy(p,pot,parms,parms->npol,0,parms->nosidechains,parms->debug),TotalEnergy(oldp,pot,parms,parms->npol,0,parms->nosidechains,parms->debug));
+src/mc.c:	parms->mov ++;
+src/mc.c:	ip = irand(parms->npol);
+src/mc.c:	if (parms->randdw==1) dw = parms->dw_pivot * (0.5 - frand());						// dihedral to pivot
+src/mc.c:	else if (parms->randdw==2) dw = parms->dw_pivot * gasdev(&(parms->seed));
+src/mc.c:		if (parms->debug>2) fprintf(stderr,"pivot ip = %d iw=%d dw=%lf half=%d\n",ip,iw,dw,half);
+src/mc.c:		if (!parms->nodihpot) deltaE -= (((p+ip)->back)+iw+1)->e_dih;			// old dihedral energy
+src/mc.c:		deltaE += EnergyMonomerRange(p,pot,0,iw,ip,parms->npol,0,1,parms->nosidechains,parms->disentangle,parms->hb);			// new energy of iw with the others
+src/mc.c:		if (!parms->nodihpot) deltaE += EnergyDihedrals(p,pot,iw+1,ip,1);
+src/mc.c:		if (!parms->nodihpot) deltaE -= (((p+ip)->back)+iw)->e_dih;				// old dihedral energy
+src/mc.c:		deltaE += EnergyMonomerRange(p,pot,iw,(p+ip)->nback-1,ip,parms->npol,0,1,parms->nosidechains,parms->disentangle,parms->hb);
+src/mc.c:		if (!parms->nodihpot) deltaE += EnergyDihedrals(p,pot,iw,ip,1);
+src/mc.c:	 if (parms->debug>2) fprintf(stderr," ip=%d iw=%d dw=%lf direction=%d\n deltaE=%lf\n",ip,iw,dw,dir,deltaE); fflush(stderr);
+src/mc.c:		if(parms->shell==1 )		// if shells are active, update them 
+src/mc.c:			parms->ishell=0;
+src/mc.c:		parms->acc ++;
+src/mc.c:	if (parms->debug>2) fprintf(stderr," accept=%d\n",ok); fflush(stderr);
+src/mc.c:	ip = irand(parms->npol);
+src/mc.c:		if (parms->debug>2) fprintf(stderr,"mpivot ip = %d iw=%d half=%d\n",ip,iw,half);
+src/mc.c:		if (!parms->nodihpot)
+src/mc.c:				if (parms->randdw==1) dw = parms->dw_mpivot * (0.5 - frand());				// dihedral to pivot
+src/mc.c:				else if (parms->randdw==2) dw = parms->dw_mpivot *gasdev(&(parms->seed));
+src/mc.c://		deltaE += EnergyMonomerRange(p,pot,0,iw,ip,parms->npol,parms->shell,1,parms->nosidechains,parms->disentangle,parms->hb);				// new energy of iw with the others
+src/mc.c:		deltaE += EnergyMonomerRange(p,pot,0,iw,ip,parms->npol,0,1,parms->nosidechains,parms->disentangle,parms->hb);    
+src/mc.c:		if (!parms->nodihpot)													// new dihedral energy
+src/mc.c:		if (!parms->nodihpot)
+src/mc.c:				if (parms->randdw==1) dw = parms->dw_mpivot * (0.5 - frand());					// dihedral to pivot
+src/mc.c:				else if (parms->randdw==2) dw = parms->dw_mpivot * gasdev(&(parms->seed));
+src/mc.c:		deltaE += EnergyMonomerRange(p,pot,iw,p->nback-1,ip,parms->npol,0,1,parms->nosidechains,parms->disentangle,parms->hb);   
+src/mc.c:	//	deltaE += EnergyMonomerRange(p,pot,iw,p->nback-1,ip,parms->npol,parms->shell,1,parms->nosidechains,parms->disentangle,parms->hb);			// new energy of iw with the others
+src/mc.c:		if (!parms->nodihpot)														// new dihedral energy
+src/mc.c:	if (parms->debug>2) fprintf(stderr,"deltaE=%lf\n",deltaE); fflush(stderr);
+src/mc.c:	//	if (idir == -1) UpdateMonomerRange(oldp,p,0,iw,ip,parms->shell);				// return to the old position, contacts, etc. (if moved first half)
+src/mc.c:			//UpdateMonomerRange(oldp,p,iw,p->nback-1,ip,parms->shell);				// ... if moved second half
+src/mc.c://		if (idir == -1) UpdateMonomerRange(p,oldp,0,iw,ip,parms->shell);				// update oldp (if moved first half)
+src/mc.c://		else UpdateMonomerRange(p,oldp,iw,p->nback-1,ip,parms->shell);		
+src/mc.c:		if(parms->shell==1 )            // if shells are active, update them 
+src/mc.c:                        parms->ishell=0;
+src/mc.c:		parms->acc ++;
+src/mc.c:	if (parms->debug>2) fprintf(stderr,"accept=%d\n",ok); fflush(stderr);
+src/mc.c:	parms->mov ++;
+src/mc.c:	ip = irand(mc_parms->npol);
+src/mc.c:	deltaE += EnergyMonomer(p,pot,iw,ip,mc_parms->npol,1,mc_parms->shell,mc_parms->nosidechains,mc_parms->disentangle,mc_parms->hb);			// new energy of iw with the others
+src/mc.c:	//deltaE += EnergyMonomer(p,pot,iw,ip,mc_parms->npol,1,0,mc_parms->nosidechains,mc_parms->disentangle,mc_parms->hb); 
+src/mc.c:		UpdateMonomer(oldp,p,iw,ip,mc_parms->shell);
+src/mc.c:		UpdateMonomer(p,oldp,iw,ip,mc_parms->shell);			
+src/mc.c:		mc_parms->acc ++;
+src/mc.c:	mc_parms->mov ++;
+src/mc.c:      rc2 = parms->r_cloose * parms->r_cloose;
+src/mc.c:      ip = irand(parms->npol);
+src/mc.c:            if (parms->debug>2) fprintf(stderr,"lpivot ip = %d iw=%d half=%d  nmul=%d\n",ip,iw,half,nmul);
+src/mc.c:            if (!parms->nodihpot)
+src/mc.c:            if (!parms->noangpot)
+src/mc.c:                        if (parms->randdw==1) dw = parms->dw_lpivot * (0.5 - frand());                            // dihedral to pivot
+src/mc.c:                        else if (parms->randdw==2) dw = parms->dw_lpivot * gasdev(&(parms->seed));
+src/mc.c:                  deltaE += EnergyMonomerRange(p,pot,iw-nmul-1,iw,ip,parms->npol,parms->shell,1,
+src/mc.c:                                                                        parms->nosidechains,parms->disentangle,parms->hb);                      // new energy of iw with the others
+src/mc.c:                  if (!parms->nodihpot)                                                                                                         // new dihedral energy
+src/mc.c:                  if (!parms->noangpot)                                                                                                         // new angle energy
+src/mc.c:            if (!parms->nodihpot)
+src/mc.c:            if (!parms->noangpot)
+src/mc.c:                        if (parms->randdw==1) dw = parms->dw_lpivot * (0.5 - frand());                      // dihedral to pivot
+src/mc.c:                        else if (parms->randdw==2) dw = parms->dw_lpivot * gasdev(&(parms->seed));
+src/mc.c:                  deltaE += EnergyMonomerRange(p,pot,iw,iw+nmul+1,ip,parms->npol,parms->shell,1,
+src/mc.c:                                                                                    parms->nosidechains,parms->disentangle,parms->hb);                // new energy of iw with the others
+src/mc.c:                  if (!parms->nodihpot)                                                                                                               // new dihedral energy
+src/mc.c:                  if (!parms->noangpot)
+src/mc.c:      if (parms->debug>2) fprintf(stderr,"deltaE=%lf\n",deltaE); fflush(stderr);
+src/mc.c:            if (idir == -1) UpdateMonomerRange(oldp,p,iw-nmul-1,iw,ip,parms->shell);            // return to the old position, contacts, etc. (if moved first half)
+src/mc.c:            else UpdateMonomerRange(oldp,p,iw,iw+nmul+1,ip,parms->shell);                       // ... if moved second half
+src/mc.c:            if (idir == -1) UpdateMonomerRange(p,oldp,iw-nmul-1,iw,ip,parms->shell);                        // update oldp (if moved first half)
+src/mc.c:            else UpdateMonomerRange(p,oldp,iw,iw+nmul+1,ip,parms->shell);                       // ... if moved second half
+src/mc.c:            parms->acc ++;
+src/mc.c:      if (parms->debug>2) fprintf(stderr,"accept=%d\n",ok); fflush(stderr);
+src/mc.c:      parms->mov ++;
+src/mc.c:	ip = irand(parms->npol);						// which chain to move
+src/mc.c:	do { i = irand(2*parms->nmul_mflip) - parms->nmul_mflip; } while ( iw1+i > (p+ip)->nback-4 || iw1+i < 3 || (i>-3 && i<3) );
+src/mc.c:	if (!parms->noangpot)
+src/mc.c:	if (!parms->nodihpot)
+src/mc.c:	dw = 2. * parms->dw_mflip * (0.5 - frand());				// angle to flip
+src/mc.c:		UpdateMonomerRange(oldp,p,iw1-1,iw2+1,ip,parms->shell);		// return to the old position, contacts, etc.
+src/mc.c:	if (parms->a_cloose>0)
+src/mc.c:			- (((p+ip)->back)+iw1-1)->a_next) > parms->a_cloose  || out==0 ) ok=0;
+src/mc.c:					- (((p+ip)->back)+iw2+1)->a_next) > parms->a_cloose  || out==0 ) ok=0;
+src/mc.c:	if (parms->d_cloose>0)
+src/mc.c:						- (((p+ip)->back)+iw1-1)->d_next ) > parms->d_cloose || out==0 ) ok=0;
+src/mc.c:						- (((p+ip)->back)+iw2+2)->d_next ) > parms->d_cloose || out==0) ok=0;
+src/mc.c:		deltaE += EnergyMonomerRange(p,pot,iw1-1,iw2+1,ip,parms->npol,parms->shell,1,parms->nosidechains,parms->disentangle,parms->hb);		// new energy of iw with the others
+src/mc.c:		if (!parms->noangpot)
+src/mc.c:		if (!parms->nodihpot)
+src/mc.c:		UpdateMonomerRange(oldp,p,iw1-1,iw2+1,ip,parms->shell);							// return to the old position, contacts, etc.
+src/mc.c:		UpdateMonomerRange(p,oldp,iw1-1,iw2+1,ip,parms->shell);							// update oldp
+src/mc.c:		parms->acc ++;
+src/mc.c:	//fprintf(stderr,"** %lf %lf\n",TotalEnergy(p,pot,parms,parms->npol,0,parms->nosidechains,parms->debug),TotalEnergy(oldp,pot,parms,parms->npol,0,parms->nosidechains,parms->debug));
+src/mc.c:	parms->mov ++;
+src/mc.c:	ip = irand(parms->npol);
+src/mc.c:	dx = parms->dx_com * frand() - parms->dx_com / 2;
+src/mc.c:	dy = parms->dx_com * frand() - parms->dx_com / 2;
+src/mc.c:	dz = parms->dx_com * frand() - parms->dx_com / 2;
+src/mc.c:	deltaE += EnergyMonomerRange(p,pot,0,(p+ip)->nback-1,ip,parms->npol,0,1,parms->nosidechains,parms->disentangle,parms->hb);
+src/mc.c:                if(parms->shell==1 )            // if shells are active, update them 
+src/mc.c:                        parms->ishell=0;
+src/mc.c:		parms->acc ++;
+src/mc.c:	parms->mov ++;
+src/mc.c:	ip=irand(parms->npol);
+src/mc.c:	dtheta= parms->dtheta * (0.5 - frand());
+src/mc.c:	deltaE += EnergyMonomerRange(p,pot,0,(p+ip)->nback-1,ip,parms->npol,0,1,parms->nosidechains,parms->disentangle,parms->hb);
+src/mc.c:       		if(parms->shell==1 )            // if shells are active, update them 
+src/mc.c:                        parms->ishell=0;
+src/mc.c:        	parms->acc ++;
+src/mc.c:        parms->mov++;
+src/mc.c:      for(ic=0;ic<parms->npol;ic++)
+src/mc.c:            for(ic=0;ic<parms->npol;ic++)
+src/mc.c:                  for(ic=cont;ic<parms->npol;ic++)
+src/mc.c:                        for(jc=0;jc<parms->npol;jc++)
+src/mc.c:                              for(jc=0;jc<parms->npol;jc++)
+src/mc.c:            for(i=cont;i<parms->npol;i++)
+src/mc.c:            if(cont==parms->npol) break;
+src/mc.c:      dx = parms->dx_clm * frand() - parms->dx_clm / 2;
+src/mc.c:      dy = parms->dx_clm * frand() - parms->dx_clm / 2;
+src/mc.c:      dz = parms->dx_clm * frand() - parms->dx_clm / 2;
+src/mc.c:            //deltaE += EnergyMonomerRange(p,pot,0,(p+ip)->nback,ip,parms->npol,parms->shell,1,parms->nosidechains,parms->disentangle,parms->hb);
+src/mc.c:	    deltaE += EnergyMonomerRange(p,pot,0,(p+ip)->nback-1,ip,parms->npol,0,1,parms->nosidechains,parms->disentangle,parms->hb);
+src/mc.c:                  //UpdateMonomerRange(oldp,p,0,(p+ip)->nback,ip,parms->shell);                                     // return to the old position, contacts, etc.
+src/mc.c:                  //UpdateMonomerRange(p,oldp,0,(p+ip)->nback,ip,parms->shell);                                     // update oldp
+src/mc.c:                  if(parms->shell==1 )            // if shells are active, update them 
+src/mc.c:                        parms->ishell=0;
+src/mc.c:                  parms->acc ++;
+src/mc.c:      parms->mov ++;
+src/mc.c:      double dtheta= parms->dtheta * (0.5 - frand());
+src/mc.c:      for(ic=0;ic<parms->npol;ic++)
+src/mc.c:                  for(ic=cont;ic<parms->npol;ic++)
+src/mc.c:                        for(jc=0;jc<parms->npol;jc++)
+src/mc.c:                              for(jc=0;jc<parms->npol;jc++)
+src/mc.c:            for(i=cont;i<parms->npol;i++)
+src/mc.c:            if(cont==parms->npol) break;
+src/mc.c://            deltaE += EnergyMonomerRange(p,pot,0,(p+ip)->nback,ip,parms->npol,parms->shell,1,parms->nosidechains,parms->disentangle,parms->hb);
+src/mc.c: //	    deltaE += EnergyMonomerRange(p,pot,0,(p+ip)->nback,ip,parms->npol,0,1,parms->nosidechains,parms->disentangle,parms->hb);
+src/mc.c:	//deltaE += EnergyMonomerRange(p,pot,0,(p+ip)->nback,ip,parms->npol,parms->shell,1,parms->nosidechains,parms->disentangle,parms->hb);
+src/mc.c:	deltaE += EnergyMonomerRange(p,pot,0,(p+ip)->nback-1,ip,parms->npol,0,1,parms->nosidechains,parms->disentangle,parms->hb);
+src/mc.c:                //  UpdateMonomerRange(oldp,p,0,(p+ip)->nback,ip,parms->shell);                                     // return to the old position, contacts, etc.
+src/mc.c: //                 UpdateMonomerRange(p,oldp,0,(p+ip)->nback,ip,parms->shell);                                     // update oldp
+src/mc.c:                 if(parms->shell==1 )            // if shells are active, update them 
+src/mc.c:                        parms->ishell=0;
+src/mc.c:                  parms->acc ++;
+src/mc.c:      parms->mov ++;
+src/mc.c:                  for(ic=cont;ic<parms->npol;ic++){
+src/mc.c.old:	if(parms->shell==1)
+src/mc.c.old:		parms->ishell=0;
+src/mc.c.old://	if (parms->stempering) st_p = parms->p;
+src/mc.c.old:	int my_rank=mpiparms->my_rank;
+src/mc.c.old:	MPI_Datatype Backtype=mpiparms->Back_mpi;
+src/mc.c.old:        MPI_Datatype Sidetype=mpiparms->Side_mpi;
+src/mc.c.old:        MPI_Datatype Rottype=mpiparms->Rot_mpi;
+src/mc.c.old:        MPI_Status astatus=mpiparms->astatus;
+src/mc.c.old:	int ex_count[(parms->ntemp)-1],ex_acc[(parms->ntemp)-1];
+src/mc.c.old:        t=parms->T[my_rank];
+src/mc.c.old:	t=parms->T;
+src/mc.c.old:		fprintf(stderr,"rank %d\t temperature = %lf\n",i,parms->T[i]);
+src/mc.c.old:	if (parms->debug>0)
+src/mc.c.old:	if (parms->debug>1)
+src/mc.c.old:		fprintf(stderr,"Moves = %d %d %d %d\n",parms->movetype[0],parms->movetype[1],
+src/mc.c.old:				parms->movetype[2],parms->movetype[3]);
+src/mc.c.old:		for (ci=0;ci<parms->npol;ci++)
+src/mc.c.old:	CopyAllPolymers(p,oldp,parms->npol,parms->nosidechains,parms->nosidechains);
+src/mc.c.old:	parms->acc = 0;
+src/mc.c.old:	parms->mov = 0;
+src/mc.c.old:      //for (i=0;i<(parms->ntemp)-1;i++) { ex_count[i]=0; ex_acc[i]=0;}
+src/mc.c.old:                        if (strcmp(parms->op_minim,"none")  && ok>-1){
+src/mc.c.old:                        if (parms->stempering){
+src/mc.c.old:                        if ((parms->p)->st_ttarget_harvest==1 && st_iprint>=(parms->p)->st_printpdb && t <= (parms->p)->st_ttarget + EPSILON && (parms->p)->st_nm==1)
+src/mc.c.old:                                       //        (parms->nstep-parms->op_wait)/parms->op_deltat,p->etot,parms->T[my_rank]);
+src/mc.c.old:                                       //       (parms->nstep-parms->op_wait)/parms->op_deltat,p->etot,parms->T);
+src/mc.c.old:                                        TotalEnergy(p,pot,parms,parms->npol,0,parms->nosidechains,parms->debug,my_rank);      // record energy
+src/mc.c.old:                                        OP_GetRestrain(op->nframes,p,0,parms->op_input);            // record restrains
+src/mc.c.old:                                        op->t[op->nframes] = parms->T[my_rank];
+src/mc.c.old:                                        op->t[op->nframes] = parms->T;
+src/mc.c.old:					if ((parms->p)->st_ttarget_harvest>0 && ok>-1 && t <= (parms->p)->st_ttarget + EPSILON ) st_iprint ++;
+src/mc.c.old:                                         if (st_o == 1) t = (parms->p)->st_temp[(parms->p)->st_itemp];
+src/mc.c.old:                                else if (op->icount == parms->op_deltat)
+src/mc.c.old:				if (op->icount == parms->op_deltat)
+src/mc.c.old:                                               (parms->nstep-parms->op_wait)/parms->op_deltat,p->etot,parms->T[my_rank]);
+src/mc.c.old:                                               (parms->nstep-parms->op_wait)/parms->op_deltat,p->etot,parms->T);
+src/mc.c.old:                                        TotalEnergy(p,pot,parms,parms->npol,0,parms->nosidechains,parms->debug,my_rank);      // record energy
+src/mc.c.old:                                        OP_GetRestrain(op->nframes,p,0,parms->op_input);            // record restrains
+src/mc.c.old:                                        op->t[op->nframes] = parms->T[my_rank];
+src/mc.c.old:                                        op->t[op->nframes] = parms->T;
+src/mc.c.old:                                if (istep >= parms->op_wait)
+src/mc.c.old:		if (parms->debug>1)
+src/mc.c.old:		if (mcount[0] == parms->movetype[0])						// flip of backbone
+src/mc.c.old:			ok = MoveBackboneFlip(p,oldp,parms,pot,istep,parms->debug,t);
+src/mc.c.old:		if (mcount[1] == parms->movetype[1])						// pivot of backbone
+src/mc.c.old:		if (mcount[2] == parms->movetype[2])						// multiple pivot of backbone
+src/mc.c.old:			ok = MoveMultiplePivot(p,oldp,pot,parms->nmul_mpivot,parms,t);
+src/mc.c.old:		if (mcount[3] == parms->movetype[3])						// move of sidechain
+src/mc.c.old:			ok = MoveSidechain(p,oldp,parms,pot,istep,parms->debug,t);
+src/mc.c.old:		if (mcount[4] == parms->movetype[4])						// loose pivot
+src/mc.c.old:			ok = MoveLoosePivot(p,oldp,pot,parms->nmul_lpivot,parms,t);
+src/mc.c.old:		if (mcount[5] == parms->movetype[5])						// multiple flip
+src/mc.c.old:			ok = MoveMultipleFlip(p,oldp,parms,pot,istep,parms->debug,t);
+src/mc.c.old:		if (mcount[6] == parms->movetype[6])						// move of center of mass
+src/mc.c.old:			ok = MoveCoM(p,oldp,parms,pot,istep,parms->debug,t);
+src/mc.c.old:		if (mcount[7] == parms->movetype[7])
+src/mc.c.old:                        ok=LocalMove(p,oldp,fragment,pot,parms->nmul_local,parms,t);
+src/mc.c.old:		if (mcount[8] == parms->movetype[8])
+src/mc.c.old:                        ok=MoveRotation(p,oldp,parms,pot,istep,parms->debug,t);
+src/mc.c.old:		//if (parms->anneal) Anneal(parms,&t,&anneal_count,&anneal_status,&ok,&ishell,mcount);
+src/mc.c.old:		if (mcount[9] == parms->movetype[9])
+src/mc.c.old:///                        ok=MoveRotation(p,oldp,parms,pot,istep,parms->debug,t);
+src/mc.c.old:		       ok=MoveClusterCoM(p,oldp,parms,pot,istep,parms->debug,t,fproc,my_rank); 
+src/mc.c.old:		if (mcount[10] == parms->movetype[10])
+src/mc.c.old://                        ok=MoveRotation(p,oldp,parms,pot,istep,parms->debug,t);
+src/mc.c.old:			ok=MoveClusterRot(p,oldp,parms,pot,istep,parms->npol,parms->debug,t,fproc,my_rank);
+src/mc.c.old:		if (iprintlog == parms->nprintlog && ok>-2)
+src/mc.c.old:				fprintf(parms->flog,"Step = %llu\tE=%lf\tok=%d\tT=%lf\n",istep,p->etot,ok,t);
+src/mc.c.old://                              TotalEnergy(p,pot,parms,parms->npol,0,parms->nosidechains,parms->debug,my_rank),ok);
+src/mc.c.old:			PrintEnergies_Parallel(stderr,parms->npol,istep,p,my_rank);
+src/mc.c.old:			TotalEnergy(p,pot,parms,parms->npol,0,parms->nosidechains,parms->debug,my_rank),ok);	// energy update in Move...
+src/mc.c.old:			if (parms->debug>4 && ok==1)
+src/mc.c.old:				PrintStructure(p,parms->npol,stderr,parms->shell);
+src/mc.c.old:		if (ftrj != NULL && iprinttrj == parms->nprinttrj && ok>-1)
+src/mc.c.old:			//CountContacts(stderr,p,parms,parms->mov);			
+src/mc.c.old:			PrintPDBStream(p,parms->npol,ftrj);
+src/mc.c.old:		if (fe != NULL && iprinte == parms->nprinte && ok>-1)
+src/mc.c.old:			PrintEnergies(fe,parms->npol,istep,p);
+src/mc.c.old:		if (parms->shell==1)
+src/mc.c.old:			if (parms->ishell == parms->nshell && ok>-1)
+src/mc.c.old:				parms->ishell=0;
+src/mc.c.old:		if (parms->stempering)
+src/mc.c.old:                                 st_o = STempering(p->etot,istep,(parms->p));
+src/mc.c.old:				if(!strcmp(parms->op_minim,"none")){
+src/mc.c.old:                                if ((parms->p)->st_ttarget_harvest==1 && st_iprint>=(parms->p)->st_printpdb && t <= (parms->p)->st_ttarget + EPSILON && (parms->p)->st_nm==1)
+src/mc.c.old:                                        PrintPDBStream(p,parms->npol,(parms->p)->st_pdbf);
+src/mc.c.old:                                        if(parms->nconf!=-1)
+src/mc.c.old:                                        if(nconf>parms->nconf-1){
+src/mc.c.old:                                        fprintf(stderr,"Reached target temperature (Ttarget=%lf).\nENDING SIMULATION\n",(parms->p)->st_ttarget);
+src/mc.c.old:                                 if ((parms->p)->st_ttarget_harvest>0 && ok>-1 && t <= (parms->p)->st_ttarget + EPSILON ) st_iprint ++;
+src/mc.c.old:                                 if (st_o == 1) t = (parms->p)->st_temp[(parms->p)->st_itemp];
+src/mc.c.old:                       if (strcmp(parms->op_minim,"none")  && ok>-1)
+src/mc.c.old:                        if (parms->stempering){
+src/mc.c.old:                        if ((parms->p)->st_ttarget_harvest==1 && st_iprint>=(parms->p)->st_printpdb && t <= (parms->p)->st_ttarget + EPSILON && (parms->p)->st_nm==1)
+src/mc.c.old:                                        //       (parms->nstep-parms->op_wait)/parms->op_deltat,p->etot,parms->T[my_rank]);
+src/mc.c.old:                                        //       (parms->nstep-parms->op_wait)/parms->op_deltat,p->etot,parms->T);
+src/mc.c.old:                                        TotalEnergy(p,pot,parms,parms->npol,0,parms->nosidechains,parms->debug,my_rank);      // record energy
+src/mc.c.old:                                        OP_GetRestrain(op->nframes,p,0,parms->op_input);            // record restrains
+src/mc.c.old:                                        op->t[op->nframes] = parms->T[my_rank];
+src/mc.c.old:                                        op->t[op->nframes] = parms->T;
+src/mc.c.old:					if ((parms->p)->st_ttarget_harvest>0 && ok>-1 && t <= (parms->p)->st_ttarget + EPSILON ) st_iprint ++;
+src/mc.c.old:                                         if (st_o == 1) t = (parms->p)->st_temp[(parms->p)->st_itemp];
+src/mc.c.old:                                else if (op->icount == parms->op_deltat)
+src/mc.c.old:				if (op->icount == parms->op_deltat)
+src/mc.c.old:                                               (parms->nstep-parms->op_wait)/parms->op_deltat,p->etot,parms->T[my_rank]);
+src/mc.c.old:                                               (parms->nstep-parms->op_wait)/parms->op_deltat,p->etot,parms->T);
+src/mc.c.old:                                        TotalEnergy(p,pot,parms,parms->npol,0,parms->nosidechains,parms->debug,my_rank);      // record energy
+src/mc.c.old:                                        OP_GetRestrain(op->nframes,p,0,parms->op_input);            // record restrains
+src/mc.c.old:                                        op->t[op->nframes] = parms->T[my_rank];
+src/mc.c.old:                                        op->t[op->nframes] = parms->T;
+src/mc.c.old:                                if (istep >= parms->op_wait)
+src/mc.c.old:                 if(ptempering_count==(parms->nstep_exchange)/2 && parms->ntemp>1)
+src/mc.c.old:                        if(parms->debug>2) 
+src/mc.c.old:                	aexchange=ExchangePol(p,replica,oldp,parms,pot,my_rank,parms->ntemp,0,ex_count,ex_acc,Backtype,Sidetype,Rottype,astatus,istep);	
+src/mc.c.old:		if(ptempering_count==(parms->nstep_exchange) && parms->ntemp>1)
+src/mc.c.old:                        if(parms->debug>2) if(my_rank==0) 
+src/mc.c.old:                        ExchangePol(p,replica,oldp,parms,pot,my_rank,parms->ntemp,1,ex_count,ex_acc,Backtype,Sidetype,Rottype,astatus,istep);
+src/mc.c.old:                        parms->ishell ++;
+src/mc.c.old:	} while (istep<parms->nstep && softexit==0);	
+src/mc.c.old:	fprintf(stderr,"\nRank %d Acceptance:\t%d / %d = %lf\n",my_rank,parms->acc,parms->mov,(double)parms->acc/parms->mov);
+src/mc.c.old:	fprintf(stderr,"\nAcceptance:\t%d / %d = %lf\n",parms->acc,parms->mov,(double)parms->acc/parms->mov);
+src/mc.c.old:	if(parms->movetype[0]!=-1)
+src/mc.c.old:	if(parms->movetype[1]!=-1) 
+src/mc.c.old:	if(parms->movetype[2]!=-1) 
+src/mc.c.old:	if(parms->movetype[3]!=-1) 
+src/mc.c.old:	if(parms->movetype[4]!=-1) 
+src/mc.c.old:	if(parms->movetype[5]!=-1) 
+src/mc.c.old:	if(parms->movetype[6]!=-1) 
+src/mc.c.old:	if(parms->movetype[7]!=-1)
+src/mc.c.old:	 if(parms->movetype[8]!=-1)
+src/mc.c.old:         if(parms->movetype[9]!=-1)
+src/mc.c.old:         if(parms->movetype[10]!=-1)
+src/mc.c.old:	PrintPDBStream(p,parms->npol,ftrj);
+src/mc.c.old:	ip = irand(parms->npol);						// which chain to move
+src/mc.c.old:	if (!parms->noangpot)
+src/mc.c.old:	if (!parms->nodihpot)
+src/mc.c.old:		dw = 2. * parms->dw_flip * (0.5 - frand());				// angle to flip
+src/mc.c.old:	if (parms->a_cloose>0)
+src/mc.c.old:			- (((p+ip)->back)+iw-1)->a_next) > parms->a_cloose || out==0) ok=0;
+src/mc.c.old:					- (((p+ip)->back)+iw+1)->a_next) > parms->a_cloose || out==0) ok=0;
+src/mc.c.old:	if (parms->d_cloose>0)
+src/mc.c.old:						- (((p+ip)->back)+iw-1)->d_next) > parms->d_cloose || out==0) ok=0;
+src/mc.c.old:						- (((p+ip)->back)+iw+2)->d_next) > parms->d_cloose || out==0) ok=0;
+src/mc.c.old:		deltaE += EnergyMonomerRange(p,pot,iw-1,iw+1,ip,parms->npol,parms->shell,1,parms->nosidechains,parms->disentangle,parms->hb);		// new energy of iw with the others
+src/mc.c.old:		if (!parms->noangpot)
+src/mc.c.old:		if (!parms->nodihpot)
+src/mc.c.old:		UpdateMonomerRange(oldp,p,iw-1,iw+1,ip,parms->shell);							// return to the old position, contacts, etc.
+src/mc.c.old:		UpdateMonomerRange(p,oldp,iw-1,iw+1,ip,parms->shell);							// update oldp
+src/mc.c.old:		parms->acc ++;
+src/mc.c.old:	//fprintf(stderr,"** %lf %lf\n",TotalEnergy(p,pot,parms,parms->npol,0,parms->nosidechains,parms->debug),TotalEnergy(oldp,pot,parms,parms->npol,0,parms->nosidechains,parms->debug));
+src/mc.c.old:	parms->mov ++;
+src/mc.c.old:	ip = irand(parms->npol);
+src/mc.c.old:	if (parms->randdw==1) dw = parms->dw_pivot * (0.5 - frand());						// dihedral to pivot
+src/mc.c.old:	else if (parms->randdw==2) dw = parms->dw_pivot * gasdev(&(parms->seed));
+src/mc.c.old:		if (parms->debug>2) fprintf(stderr,"pivot ip = %d iw=%d dw=%lf half=%d\n",ip,iw,dw,half);
+src/mc.c.old:		if (!parms->nodihpot) deltaE -= (((p+ip)->back)+iw+1)->e_dih;			// old dihedral energy
+src/mc.c.old:		deltaE += EnergyMonomerRange(p,pot,0,iw,ip,parms->npol,0,1,parms->nosidechains,parms->disentangle,parms->hb);			// new energy of iw with the others
+src/mc.c.old:		if (!parms->nodihpot) deltaE += EnergyDihedrals(p,pot,iw+1,ip,1);
+src/mc.c.old:		if (!parms->nodihpot) deltaE -= (((p+ip)->back)+iw)->e_dih;				// old dihedral energy
+src/mc.c.old:		deltaE += EnergyMonomerRange(p,pot,iw,(p+ip)->nback-1,ip,parms->npol,0,1,parms->nosidechains,parms->disentangle,parms->hb);
+src/mc.c.old:		if (!parms->nodihpot) deltaE += EnergyDihedrals(p,pot,iw,ip,1);
+src/mc.c.old:	 if (parms->debug>2) fprintf(stderr," ip=%d iw=%d dw=%lf direction=%d\n deltaE=%lf\n",ip,iw,dw,dir,deltaE); fflush(stderr);
+src/mc.c.old:		if(parms->shell==1 )		// if shells are active, update them 
+src/mc.c.old:			parms->ishell=0;
+src/mc.c.old:		parms->acc ++;
+src/mc.c.old:	if (parms->debug>2) fprintf(stderr," accept=%d\n",ok); fflush(stderr);
+src/mc.c.old:	ip = irand(parms->npol);
+src/mc.c.old:		if (parms->debug>2) fprintf(stderr,"mpivot ip = %d iw=%d half=%d\n",ip,iw,half);
+src/mc.c.old:		if (!parms->nodihpot)
+src/mc.c.old:				if (parms->randdw==1) dw = parms->dw_mpivot * (0.5 - frand());				// dihedral to pivot
+src/mc.c.old:				else if (parms->randdw==2) dw = parms->dw_mpivot *gasdev(&(parms->seed));
+src/mc.c.old:		deltaE += EnergyMonomerRange(p,pot,0,iw,ip,parms->npol,parms->shell,1,
+src/mc.c.old:											parms->nosidechains,parms->disentangle,parms->hb);				// new energy of iw with the others
+src/mc.c.old:		if (!parms->nodihpot)													// new dihedral energy
+src/mc.c.old:		if (!parms->nodihpot)
+src/mc.c.old:				if (parms->randdw==1) dw = parms->dw_mpivot * (0.5 - frand());					// dihedral to pivot
+src/mc.c.old:				else if (parms->randdw==2) dw = parms->dw_mpivot * gasdev(&(parms->seed));
+src/mc.c.old:		deltaE += EnergyMonomerRange(p,pot,iw,p->nback-1,ip,parms->npol,parms->shell,1,
+src/mc.c.old:													parms->nosidechains,parms->disentangle,parms->hb);			// new energy of iw with the others
+src/mc.c.old:		if (!parms->nodihpot)														// new dihedral energy
+src/mc.c.old:	if (parms->debug>2) fprintf(stderr,"deltaE=%lf\n",deltaE); fflush(stderr);
+src/mc.c.old:		if (idir == -1) UpdateMonomerRange(oldp,p,0,iw,ip,parms->shell);				// return to the old position, contacts, etc. (if moved first half)
+src/mc.c.old:		else UpdateMonomerRange(oldp,p,iw,p->nback-1,ip,parms->shell);				// ... if moved second half
+src/mc.c.old:		if (idir == -1) UpdateMonomerRange(p,oldp,0,iw,ip,parms->shell);				// update oldp (if moved first half)
+src/mc.c.old:		else UpdateMonomerRange(p,oldp,iw,p->nback-1,ip,parms->shell);				// ... if moved second half
+src/mc.c.old:		parms->acc ++;
+src/mc.c.old:	if (parms->debug>2) fprintf(stderr,"accept=%d\n",ok); fflush(stderr);
+src/mc.c.old:	parms->mov ++;
+src/mc.c.old:	ip = irand(mc_parms->npol);
+src/mc.c.old:	deltaE += EnergyMonomer(p,pot,iw,ip,mc_parms->npol,1,mc_parms->shell,mc_parms->nosidechains,mc_parms->disentangle,mc_parms->hb);			// new energy of iw with the others
+src/mc.c.old:	//deltaE += EnergyMonomer(p,pot,iw,ip,mc_parms->npol,1,0,mc_parms->nosidechains,mc_parms->disentangle,mc_parms->hb); 
+src/mc.c.old:		UpdateMonomer(oldp,p,iw,ip,mc_parms->shell);
+src/mc.c.old:		UpdateMonomer(p,oldp,iw,ip,mc_parms->shell);			
+src/mc.c.old:		mc_parms->acc ++;
+src/mc.c.old:	mc_parms->mov ++;
+src/mc.c.old:      rc2 = parms->r_cloose * parms->r_cloose;
+src/mc.c.old:      ip = irand(parms->npol);
+src/mc.c.old:            if (parms->debug>2) fprintf(stderr,"lpivot ip = %d iw=%d half=%d  nmul=%d\n",ip,iw,half,nmul);
+src/mc.c.old:            if (!parms->nodihpot)
+src/mc.c.old:            if (!parms->noangpot)
+src/mc.c.old:                        if (parms->randdw==1) dw = parms->dw_lpivot * (0.5 - frand());                            // dihedral to pivot
+src/mc.c.old:                        else if (parms->randdw==2) dw = parms->dw_lpivot * gasdev(&(parms->seed));
+src/mc.c.old:                  deltaE += EnergyMonomerRange(p,pot,iw-nmul-1,iw,ip,parms->npol,parms->shell,1,
+src/mc.c.old:                                                                        parms->nosidechains,parms->disentangle,parms->hb);                      // new energy of iw with the others
+src/mc.c.old:                  if (!parms->nodihpot)                                                                                                         // new dihedral energy
+src/mc.c.old:                  if (!parms->noangpot)                                                                                                         // new angle energy
+src/mc.c.old:            if (!parms->nodihpot)
+src/mc.c.old:            if (!parms->noangpot)
+src/mc.c.old:                        if (parms->randdw==1) dw = parms->dw_lpivot * (0.5 - frand());                      // dihedral to pivot
+src/mc.c.old:                        else if (parms->randdw==2) dw = parms->dw_lpivot * gasdev(&(parms->seed));
+src/mc.c.old:                  deltaE += EnergyMonomerRange(p,pot,iw,iw+nmul+1,ip,parms->npol,parms->shell,1,
+src/mc.c.old:                                                                                    parms->nosidechains,parms->disentangle,parms->hb);                // new energy of iw with the others
+src/mc.c.old:                  if (!parms->nodihpot)                                                                                                               // new dihedral energy
+src/mc.c.old:                  if (!parms->noangpot)
+src/mc.c.old:      if (parms->debug>2) fprintf(stderr,"deltaE=%lf\n",deltaE); fflush(stderr);
+src/mc.c.old:            if (idir == -1) UpdateMonomerRange(oldp,p,iw-nmul-1,iw,ip,parms->shell);            // return to the old position, contacts, etc. (if moved first half)
+src/mc.c.old:            else UpdateMonomerRange(oldp,p,iw,iw+nmul+1,ip,parms->shell);                       // ... if moved second half
+src/mc.c.old:            if (idir == -1) UpdateMonomerRange(p,oldp,iw-nmul-1,iw,ip,parms->shell);                        // update oldp (if moved first half)
+src/mc.c.old:            else UpdateMonomerRange(p,oldp,iw,iw+nmul+1,ip,parms->shell);                       // ... if moved second half
+src/mc.c.old:            parms->acc ++;
+src/mc.c.old:      if (parms->debug>2) fprintf(stderr,"accept=%d\n",ok); fflush(stderr);
+src/mc.c.old:      parms->mov ++;
+src/mc.c.old:	ip = irand(parms->npol);						// which chain to move
+src/mc.c.old:	do { i = irand(2*parms->nmul_mflip) - parms->nmul_mflip; } while ( iw1+i > (p+ip)->nback-4 || iw1+i < 3 || (i>-3 && i<3) );
+src/mc.c.old:	if (!parms->noangpot)
+src/mc.c.old:	if (!parms->nodihpot)
+src/mc.c.old:	dw = 2. * parms->dw_mflip * (0.5 - frand());				// angle to flip
+src/mc.c.old:		UpdateMonomerRange(oldp,p,iw1-1,iw2+1,ip,parms->shell);		// return to the old position, contacts, etc.
+src/mc.c.old:	if (parms->a_cloose>0)
+src/mc.c.old:			- (((p+ip)->back)+iw1-1)->a_next) > parms->a_cloose  || out==0 ) ok=0;
+src/mc.c.old:					- (((p+ip)->back)+iw2+1)->a_next) > parms->a_cloose  || out==0 ) ok=0;
+src/mc.c.old:	if (parms->d_cloose>0)
+src/mc.c.old:						- (((p+ip)->back)+iw1-1)->d_next ) > parms->d_cloose || out==0 ) ok=0;
+src/mc.c.old:						- (((p+ip)->back)+iw2+2)->d_next ) > parms->d_cloose || out==0) ok=0;
+src/mc.c.old:		deltaE += EnergyMonomerRange(p,pot,iw1-1,iw2+1,ip,parms->npol,parms->shell,1,parms->nosidechains,parms->disentangle,parms->hb);		// new energy of iw with the others
+src/mc.c.old:		if (!parms->noangpot)
+src/mc.c.old:		if (!parms->nodihpot)
+src/mc.c.old:		UpdateMonomerRange(oldp,p,iw1-1,iw2+1,ip,parms->shell);							// return to the old position, contacts, etc.
+src/mc.c.old:		UpdateMonomerRange(p,oldp,iw1-1,iw2+1,ip,parms->shell);							// update oldp
+src/mc.c.old:		parms->acc ++;
+src/mc.c.old:	//fprintf(stderr,"** %lf %lf\n",TotalEnergy(p,pot,parms,parms->npol,0,parms->nosidechains,parms->debug),TotalEnergy(oldp,pot,parms,parms->npol,0,parms->nosidechains,parms->debug));
+src/mc.c.old:	parms->mov ++;
+src/mc.c.old:	ip = irand(parms->npol);
+src/mc.c.old:	dx = parms->dx_com * frand() - parms->dx_com / 2;
+src/mc.c.old:	dy = parms->dx_com * frand() - parms->dx_com / 2;
+src/mc.c.old:	dz = parms->dx_com * frand() - parms->dx_com / 2;
+src/mc.c.old:	deltaE += EnergyMonomerRange(p,pot,0,(p+ip)->nback-1,ip,parms->npol,0,1,parms->nosidechains,parms->disentangle,parms->hb);
+src/mc.c.old:                if(parms->shell==1 )            // if shells are active, update them 
+src/mc.c.old:                        parms->ishell=0;
+src/mc.c.old:		parms->acc ++;
+src/mc.c.old:	parms->mov ++;
+src/mc.c.old:	ip=irand(parms->npol);
+src/mc.c.old:	dtheta= parms->dtheta * (0.5 - frand());
+src/mc.c.old:	deltaE += EnergyMonomerRange(p,pot,0,(p+ip)->nback-1,ip,parms->npol,0,1,parms->nosidechains,parms->disentangle,parms->hb);
+src/mc.c.old:       		if(parms->shell==1 )            // if shells are active, update them 
+src/mc.c.old:                        parms->ishell=0;
+src/mc.c.old:        	parms->acc ++;
+src/mc.c.old:        parms->mov++;
+src/mc.c.old:      for(ic=0;ic<parms->npol;ic++)
+src/mc.c.old:            for(ic=0;ic<parms->npol;ic++)
+src/mc.c.old:                  for(ic=cont;ic<parms->npol;ic++)
+src/mc.c.old:                        for(jc=0;jc<parms->npol;jc++)
+src/mc.c.old:                              for(jc=0;jc<parms->npol;jc++)
+src/mc.c.old:            for(i=cont;i<parms->npol;i++)
+src/mc.c.old:            if(cont==parms->npol) break;
+src/mc.c.old:      dx = parms->dx_clm * frand() - parms->dx_clm / 2;
+src/mc.c.old:      dy = parms->dx_clm * frand() - parms->dx_clm / 2;
+src/mc.c.old:      dz = parms->dx_clm * frand() - parms->dx_clm / 2;
+src/mc.c.old:            //deltaE += EnergyMonomerRange(p,pot,0,(p+ip)->nback,ip,parms->npol,parms->shell,1,parms->nosidechains,parms->disentangle,parms->hb);
+src/mc.c.old:	    deltaE += EnergyMonomerRange(p,pot,0,(p+ip)->nback,ip,parms->npol,0,1,parms->nosidechains,parms->disentangle,parms->hb);
+src/mc.c.old:                  //UpdateMonomerRange(oldp,p,0,(p+ip)->nback,ip,parms->shell);                                     // return to the old position, contacts, etc.
+src/mc.c.old:                  //UpdateMonomerRange(p,oldp,0,(p+ip)->nback,ip,parms->shell);                                     // update oldp
+src/mc.c.old:                  if(parms->shell==1 )            // if shells are active, update them 
+src/mc.c.old:                        parms->ishell=0;
+src/mc.c.old:                  parms->acc ++;
+src/mc.c.old:      parms->mov ++;
+src/mc.c.old:      double dtheta= parms->dtheta * (0.5 - frand());
+src/mc.c.old:      for(ic=0;ic<parms->npol;ic++)
+src/mc.c.old:                  for(ic=cont;ic<parms->npol;ic++)
+src/mc.c.old:                        for(jc=0;jc<parms->npol;jc++)
+src/mc.c.old:                              for(jc=0;jc<parms->npol;jc++)
+src/mc.c.old:            for(i=cont;i<parms->npol;i++)
+src/mc.c.old:            if(cont==parms->npol) break;
+src/mc.c.old://            deltaE += EnergyMonomerRange(p,pot,0,(p+ip)->nback,ip,parms->npol,parms->shell,1,parms->nosidechains,parms->disentangle,parms->hb);
+src/mc.c.old: //	    deltaE += EnergyMonomerRange(p,pot,0,(p+ip)->nback,ip,parms->npol,0,1,parms->nosidechains,parms->disentangle,parms->hb);
+src/mc.c.old:	//deltaE += EnergyMonomerRange(p,pot,0,(p+ip)->nback,ip,parms->npol,parms->shell,1,parms->nosidechains,parms->disentangle,parms->hb);
+src/mc.c.old:	deltaE += EnergyMonomerRange(p,pot,0,(p+ip)->nback,ip,parms->npol,0,1,parms->nosidechains,parms->disentangle,parms->hb);
+src/mc.c.old:                //  UpdateMonomerRange(oldp,p,0,(p+ip)->nback,ip,parms->shell);                                     // return to the old position, contacts, etc.
+src/mc.c.old: //                 UpdateMonomerRange(p,oldp,0,(p+ip)->nback,ip,parms->shell);                                     // update oldp
+src/mc.c.old:                 if(parms->shell==1 )            // if shells are active, update them 
+src/mc.c.old:                        parms->ishell=0;
+src/mc.c.old:                  parms->acc ++;
+src/mc.c.old:      parms->mov ++;
+src/mc.c.old:                  for(ic=cont;ic<parms->npol;ic++){
+src/montegrappa.c:	Create_parms_datatype(&(mpiparms->Parms_mpi));
+src/montegrappa.c:	Create_back_datatype(&(mpiparms->Back_mpi));
+src/montegrappa.c:	Create_side_datatype(&(mpiparms->Side_mpi));
+src/montegrappa.c:	Create_rot_datatype(&(mpiparms->Rot_mpi));
+src/montegrappa.c:	Create_pot_datatype(&(mpiparms->Pot_mpi));
+src/montegrappa.c:	mpiparms->my_rank=my_rank;
+src/montegrappa.c:	mpiparms->nprocs=nprocs;
+src/montegrappa.c:		parms->r2shell=(parms->r2shell)*(parms->r2shell);
+src/montegrappa.c:     			if (parms->debug>0) Error("To debug, the program must be compiled with #define DEBUG");
+src/montegrappa.c:           	if(nprocs!= parms->ntemp)
+src/montegrappa.c:	parms=send_parms(mpiparms->my_rank,nprocs,mpiparms->Parms_mpi,parms,astatus);
+src/montegrappa.c:	if (strcmp(parms->fnproc,""))
+src/montegrappa.c:            sprintf(fname,"%s_%d.log",parms->fnproc,my_rank);
+src/montegrappa.c:	if(parms->debug>1) 
+src/montegrappa.c:		fprintf(fproc, "iproc=%d\tnrun=%d\tnstep=%llu\tnpol=%d\ttemp=%f\tnstep_exchange=%d\n", my_rank, parms->nrun, parms->nstep, parms->npol, parms->T[mpiparms->my_rank],parms->nstep_exchange);
+src/montegrappa.c:	parms->seed = Randomize(parms->seed);
+src/montegrappa.c:	startp = AlloPolymer(parms->npol,NRESMAX,NSIDEMAX,NROTMAX,NATOMMAX,parms->shell,parms->nosidechains,parms->flog);
+src/montegrappa.c:	polymer = AlloPolymer(parms->npol,NRESMAX,NSIDEMAX,NROTMAX,NATOMMAX,parms->shell,parms->nosidechains,parms->flog);
+src/montegrappa.c:	oldp = AlloPolymer(parms->npol,NRESMAX,NSIDEMAX,NROTMAX,NATOMMAX,parms->shell,parms->nosidechains,parms->flog);
+src/montegrappa.c:	replica = AlloPolymer(parms->npol,NRESMAX,NSIDEMAX,NROTMAX,NATOMMAX,parms->shell,parms->nosidechains,fproc);
+src/montegrappa.c:     	if( parms->nmul_local !=0 && parms->movetype[7]!=-1) 
+src/montegrappa.c://            fprintf(stderr,"Fragment length: %d(+1)\n",parms->nmul_local);
+src/montegrappa.c://		fprintf(stderr,"npol %d \n",parms->npol);	      
+src/montegrappa.c:	      fragment=Allo_Fragment(parms->npol,parms->nmul_local,parms->nmul_local,parms->flog);
+src/montegrappa.c:	for (i=0;i<parms->npol;i++) (polymer+i)->tables = startp->tables; // tables of all polymers point to same address
+src/montegrappa.c:	for (i=0;i<parms->npol;i++) (replica+i)->tables = startp->tables; // tables of all polymers point to same address
+src/montegrappa.c:	for (i=1;i<parms->npol;i++) (startp+i)->tables = startp->tables;  // tables of all polymers point to same address
+src/montegrappa.c:      	ReadPolymer(polname,startp,parms->flog,parms->npol, parms->debug, &nat, &ntypes);
+src/montegrappa.c:	for (i=0;i<parms->npol;i++)
+src/montegrappa.c:        	send_struct(&((startp+i)->nback),mpiparms-> my_rank, nprocs, &nat, &ntypes, astatus);
+src/montegrappa.c:        	startp = send_pol(mpiparms->my_rank, nprocs, (startp+i)->nback, mpiparms->Back_mpi, mpiparms->Side_mpi, mpiparms->Rot_mpi, startp, astatus, i, parms->nshell, parms->nosidechains);
+src/montegrappa.c:	if(parms->debug>1)
+src/montegrappa.c:            fprintf(fproc,"iproc=%d\tnat=%d\tntypes=%d\tnback=%d\n",mpiparms->my_rank, nat, ntypes, startp->nback);
+src/montegrappa.c:	for (i=0;i<parms->npol;i++)
+src/montegrappa.c:	u = AlloPotential(nat,ntypes,parms->noangpot,parms->nodihpot,parms->hb);
+src/montegrappa.c:	u = send_pot(nat,ntypes,parms->noangpot,parms->nodihpot,parms->hb, my_rank, nprocs,mpiparms-> Pot_mpi, u, astatus);
+src/montegrappa.c:	CheckOverlaps(startp,u,parms,parms->npol,parms->nosidechains,1,fproc);
+src/montegrappa.c:	if(parms->debug>1)
+src/montegrappa.c:	for(ci=0;ci<parms->npol;ci++)
+src/montegrappa.c:			if(parms->debug>1)
+src/montegrappa.c:			if(parms->debug>1 && i>0)
+src/montegrappa.c:			if (parms->debug>1 && i>1)
+src/montegrappa.c:	if(parms->chi2start==0)
+src/montegrappa.c:	for (irun=parms->chi2start;irun<parms->nrun;irun++)
+src/montegrappa.c:		if (irun==0 || parms->always_restart)
+src/montegrappa.c:			CopyAllPolymers(startp,polymer,parms->npol,parms->nosidechains,parms->nosidechains);
+src/montegrappa.c:			CopyAllPolymers(startp,replica,parms->npol,parms->nosidechains,parms->nosidechains);
+src/montegrappa.c:		polymer->etot = TotalEnergy(polymer,u,parms,parms->npol,1,parms->nosidechains,parms->debug,my_rank);
+src/montegrappa.c:		replica->etot = TotalEnergy(replica,u,parms,parms->npol,1,parms->nosidechains,parms->debug,my_rank);
+src/montegrappa.c:		if (parms->shell==1)
+src/montegrappa.c:		if (parms->shell==1) 	UpdateShell(replica,parms);
+src/montegrappa.c:		if (parms->nrun>1) fprintf(stderr,"> rank %d Starting run %d\n",my_rank,irun);
+src/montegrappa.c:		if (parms->nrun>1) fprintf(stderr,"Starting run %d\n",irun);
+src/montegrappa.c:                  if (parms->nrun>1) sprintf(fname,"%s_run%d_proc%d.pdb",parms->fntrj,irun,my_rank);
+src/montegrappa.c:                  else sprintf(fname,"%s_proc%d.pdb",parms->fntrj,my_rank);
+src/montegrappa.c:                  if (parms->nrun>1) sprintf(fname,"%s_run%d.pdb",parms->fntrj,irun);
+src/montegrappa.c:                  else sprintf(fname,"%s.pdb",parms->fntrj);
+src/montegrappa.c:                  PrintPDBStream(polymer,parms->npol,ftrj);
+src/montegrappa.c:		if (strcmp(parms->fne,""))
+src/montegrappa.c:	        	if (parms->nrun>1)
+src/montegrappa.c:				sprintf(fname,"%s_run%d_proc%d.ene",parms->fne,irun,my_rank);
+src/montegrappa.c:				sprintf(fname,"%s_proc%d.ene",parms->fne,my_rank);
+src/montegrappa.c:                  	if (parms->nrun>1) 
+src/montegrappa.c:				sprintf(fname,"%s_run%d.ene",parms->fne,irun);
+src/montegrappa.c:				sprintf(fname,"%s.ene",parms->fne);
+src/montegrappa.c:			PrintEnergies(fe,parms->npol,0,polymer);
+src/montegrappa.c:		if(parms->npol>1)
+src/montegrappa.c:		if(parms->shell==1)
+src/montegrappa.c:				fprintf(stderr,"LOCAL MOVE: SETTING UP REPLICAS [ iT_bias = %d ] \n",parms->iT_bias);
+src/montegrappa.c:			fprintf(stderr,"rank %d\tnshell=%d\n",my_rank,parms->nshell);
+src/montegrappa.c:			if(parms->movetype[7]>0)
+src/montegrappa.c:			if(my_rank>=parms->iT_bias)
+src/montegrappa.c:				parms->movetype[7]=0;
+src/montegrappa.c:			fprintf(stderr,"rank %d\tbgs frequency= %d\n",my_rank,parms->movetype[7]);
+src/montegrappa.c:	         	if (strcmp(parms->op_minim,"none"))
+src/montegrappa.c:            			u = send_pot(nat,ntypes,parms->noangpot,parms->nodihpot,parms->hb, my_rank, nprocs, mpiparms->Pot_mpi, u, astatus);
+src/montegrappa.c:                        		PrintPotential(u,fname,nat,ntypes,parms->noangpot,parms->nodihpot,parms->hb);
+src/montegrappa.c:		if (parms->nrun>1) 
+src/montegrappa.c:			sprintf(fname,"%s_run%d_proc%d.pol",parms->flastp,irun,my_rank);
+src/montegrappa.c:			sprintf(fname,"%s_proc%d.pol",parms->flastp,my_rank);
+src/montegrappa.c:		if (parms->nrun>1)
+src/montegrappa.c:			sprintf(fname,"%s_run%d.pol",parms->flastp,irun);
+src/montegrappa.c:			sprintf(fname,"%s.pol",parms->flastp);
+src/montegrappa.c:		CheckOverlaps(polymer,u,parms,parms->npol,parms->nosidechains,1,fproc);
+src/montegrappa.c:           	PrintPolymer(fname,polymer,parms->npol);
+src/montegrappa.c:	       	fprintf(fproc,"Final: Etot=%lf\tEtot(true)=%lf\n",polymer->etot,TotalEnergy(polymer,u,parms,parms->npol,0,parms->nosidechains,parms->debug,my_rank));
+src/montegrappa.c:		if (strcmp(parms->fntrj,"")) fclose(ftrj);
+src/montegrappa.c:		if (strcmp(parms->fne,"")) fclose(fe);
+src/montegrappa.c:        if (parms->stempering)
+src/montegrappa.c:        FreeStempering((parms->p));
+src/montegrappa.c:        else free(parms->p);
+src/montegrappa.c:	if(irun<((parms->nrun)-1))	
+src/montegrappa.c:	FreePolymer(polymer,parms->npol, NRESMAX, NSIDEMAX, parms->shell, parms->nosidechains);
+src/montegrappa.c:	FreePolymer(oldp,parms->npol, NRESMAX, NSIDEMAX, parms->shell, parms->nosidechains);	
+src/montegrappa.c:	if (strcmp(parms->op_minim,"none"))
+src/montegrappa.c:	FreeOpt(startp->op,parms,parms->op_input->ndata);
+src/montegrappa.c:	FreePolymer(startp,parms->npol, NRESMAX, NSIDEMAX, parms->shell, parms->nosidechains);
+src/montegrappa.c:	FreePolymer(replica,parms->npol, NRESMAX, NSIDEMAX, parms->shell, parms->nosidechains);
+src/montegrappa.c:	FreePotential(u,ntypes,parms->noangpot,parms->nodihpot,parms->hb);
+src/montegrappa.c:	if(parms->nmul_local !=0 && parms->movetype[7]!=-1)
+src/montegrappa.c:	if(my_rank==0 && strcmp(parms->op_minim,"none"))	
+src/montegrappa.c:	FreeOptInput(parms->op_input);	
+src/montegrappa.c:	MPI_Type_free(&mpiparms->Parms_mpi);
+src/montegrappa.c:	MPI_Type_free(&mpiparms->Pot_mpi);
+src/montegrappa.c:	MPI_Type_free(&mpiparms->Rot_mpi);
+src/montegrappa.c:	MPI_Type_free(&mpiparms->Side_mpi);
+src/montegrappa.c:	MPI_Type_free(&mpiparms->Back_mpi);
+src/MPIfunc.c:	int nosidechains=parms->nosidechains;
+src/MPIfunc.c:	E[iproc]=TotalEnergy(polymer,u,parms,parms->npol,1,parms->nosidechains,parms->debug,iproc);
+src/MPIfunc.c:		CheckOverlaps(polymer,u,parms,parms->npol,parms->nosidechains,1,stderr);		
+src/MPIfunc.c://DEBUG			if(E[i]>800) 	CheckOverlaps(polymer,u,parms,parms->npol,parms->nosidechains,1,stderr);
+src/MPIfunc.c:			denomT = (parms->T[i]*parms->T[i+1])/(parms->T[i+1]-parms->T[i]) ;
+src/MPIfunc.c:                        if(parms->debug>2) fprintf(stderr,"i=%d\tT(i)=%f\tT(i+1)=%f\tdelta=%f\tacc=%d\n",i,parms->T[i],parms->T[i+1],delta,a);
+src/MPIfunc.c:		for(ipolymer=0;ipolymer<parms->npol;ipolymer++)
+src/MPIfunc.c:		CopyAllPolymers(replica,polymer,parms->npol,parms->nosidechains,parms->nosidechains);
+src/MPIfunc.c:		CopyAllPolymers(replica,oldp,parms->npol,parms->nosidechains,parms->nosidechains);
+src/MPIfunc.c:		polymer->etot = TotalEnergy(polymer,u,parms,parms->npol,1,parms->nosidechains,parms->debug,iproc);
+src/MPIfunc.c:		oldp->etot=TotalEnergy(oldp,u,parms,parms->npol,1,parms->nosidechains,parms->debug,iproc);
+src/MPIfunc.c:		if (parms->shell==1)
+src/MPIfunc.c.old:	int nosidechains=parms->nosidechains;
+src/MPIfunc.c.old:			denomT = (parms->T[i]*parms->T[i+1])/(parms->T[i+1]-parms->T[i]) ;
+src/MPIfunc.c.old:                        if(parms->debug>2) fprintf(stderr,"i=%d\tT(i)=%f\tT(i+1)=%f\tdelta=%f\tacc=%d\n",i,parms->T[i],parms->T[i+1],delta,a);
+src/MPIfunc.c.old:		CopyAllPolymers(replica,polymer,parms->npol,parms->nosidechains,parms->nosidechains);
+src/MPIfunc.c.old:		CopyAllPolymers(replica,oldp,parms->npol,parms->nosidechains,parms->nosidechains);
+src/MPIfunc.c.old:		polymer->etot = TotalEnergy(polymer,u,parms,parms->npol,1,parms->nosidechains,parms->debug,iproc);
+src/MPIfunc.c.old:		if (parms->shell==1)	UpdateShell(polymer,parms);
+src/optimizepot.c:	if (!strcmp(parms->op_minim,"none"))
+src/optimizepot.c:		parms->op_input = ReadOPRestrains(parms);
+src/optimizepot.c:		fprintf(stderr," ntypes=%d\n OP_NCONTMAX=%d\n nrestr=%d\n nframes=%llu\n",ntypes,OP_NCONTMAX,parms->op_input->ndata,parms->nstep/parms->op_deltat+1);
+src/optimizepot.c:	*nrestr=parms->op_input->ndata;
+src/optimizepot.c:	parms->op_input = Allo_op_input(*nrestr);
+src/optimizepot.c:	parms->op_input = send_op_input((*nrestr),parms->op_input);
+src/optimizepot.c:	fprintf(fproc," ntypes=%d\n OP_NCONTMAX=%d\n nrestr=%d\n nframes=%llu\n",ntypes,OP_NCONTMAX,parms->op_input->ndata,parms->nstep/parms->op_deltat+1);
+src/optimizepot.c:	x = AlloOptimizePot(parms,ntypes,parms->op_input->ndata,fproc);
+src/optimizepot.c:	if (parms->op_r>0)
+src/optimizepot.c:					 u->r_2[i][j] = parms->op_r * parms->op_r;
+src/optimizepot.c:					 u->r_2[j][i] = parms->op_r * parms->op_r;
+src/optimizepot.c:				  	 u->r0_2[i][j] = parms->op_r0 * parms->op_r0;
+src/optimizepot.c:					 u->r0_2[j][i] = parms->op_r0 * parms->op_r0;
+src/optimizepot.c:	nframes = (parms->nstep / parms->op_deltat) + 1;
+src/optimizepot.c:    nframes = (parms->nstep / parms->op_deltat) + 1;
+src/optimizepot.c:	fp = fopen(parms->fnop,"r");
+src/optimizepot.c:	irunstart=parms->chi2start;
+src/optimizepot.c:	chi2old = OP_function(u,p->op,parms->op_input,parms);
+src/optimizepot.c://	fprintf(stderr,"Potential Optimization \n> Initial value of Chi2 = %lf | Reduced = %lf\n",chi2old,chi2old/(parms->op_input->ndata));
+src/optimizepot.c:	fprintf(stderr,"Potential Optimization \n> Initial value of Chi2 %lf\n",chi2old/(parms->op_input->ndata));
+src/optimizepot.c:	if(parms->nrun>1)
+src/optimizepot.c:		fprintf(fc,"%d\t%lf\n",irun+irunstart, chi2old/(parms->op_input->ndata));
+src/optimizepot.c:	for (istep=0;istep<parms->op_itermax;istep++)
+src/optimizepot.c:		deltae = (frand()-0.5) * parms->op_step;
+src/optimizepot.c:		do { deltae = (frand()-0.5) * parms->op_step; }					// generate a random deltae
+src/optimizepot.c:		while ( u[p->op->it1[iw]][p->op->it2[iw]]+deltae < parms->op_emin ||
+src/optimizepot.c:			 u[p->op->it1[iw]][p->op->it2[iw]]+deltae > parms->op_emax );		// check if matrix element within boundaries
+src/optimizepot.c:		chi2 = OP_functionDiff(iw,deltae,p->op,parms->op_input,parms);
+src/optimizepot.c:	//	if (!(istep%parms->op_print)) fprintf(stderr,"   %5d\t\t%lf\t%lf\n",istep,chi2old, chi2old/(parms->op_input->ndata));
+src/optimizepot.c:		if (!(istep%parms->op_print)) fprintf(stderr,"   %5d\t\t%lf\n",istep,chi2old/(parms->op_input->ndata));
+src/optimizepot.c:		if (chi2<parms->op_stop) break;
+src/optimizepot.c:	fprintf(stderr,"> Result of the sampling: Chi2=%lf\n",chi2old/parms->op_input->ndata);
+src/optimizepot.c:	for (i=0;i<parms->op_input->ndata;i++)
+src/optimizepot.c:		fprintf(fp,"%d\t%lf\t%lf\t%lf\n",i,p->op->rest_av[i],parms->op_input->expdata[i],parms->op_input->sigma[i]);
+src/optimizepot.c:		for (i=0;i<parms->op_input->ndata;i++)  p->op->restrain[ifr][i] = 0;
+src/optimizepot.c:	for (i=0;i<parms->op_input->ndata;i++) p->op->rest_av[i] = 0;
+src/optimizepot.c:		for (i=0;i<parms->op_input->ndata;i++)  p->op->restrain[ifr][i] = 0;
+src/optimizepot.c:	for (i=0;i<parms->op_input->ndata;i++) p->op->rest_av[i] = 0;
+src/optimizepot.c:		if (-x->enew[ifr]/parms->op_T + x->eold[ifr]/x->t[ifr] > emax) 
+src/optimizepot.c:						emax = -x->enew[ifr]/parms->op_T + x->eold[ifr]/x->t[ifr];
+src/optimizepot.c:		boltz = exp(-enew/parms->op_T + eold/x->t[ifr] - emax);
+src/optimizepot.c:		if (-x->enew[ifr]/parms->op_T + x->eold[ifr]/x->t[ifr] > emax) 
+src/optimizepot.c:						emax = -x->enew[ifr]/parms->op_T + x->eold[ifr]/x->t[ifr];
+src/optimizepot.c:		boltz = exp(-enew/parms->op_T + eold/x->t[ifr] - emax);
+src/pdb.c:        for(i=0;i<parms->n_back_a;i++)
+src/pdb.c:		  if (!strcmp(atom,parms->back_a[i])) (*nbackmax) ++;
+src/pdb.c:	if (!parms->nosidechain)
+src/pdb.c:		if (parms->sidescratch)
+src/pdb.c:			if (parms->rotamers) Rot2Polymer(nrot_kinds,nchains,polymer,rotamers,parms);
+src/pdb.c:			if (!parms->pdb_rot) SetRotamersSimilarToPDB(nchains,polymer,a,na);
+src/pdb.c:			for(j=0;j<parms->n_back_a;j++)											// check if that atom can be moved
+src/pdb.c:			if (!strcmp((a+i)->atom,parms->back_a[j])) (((polymer+ic)->back)+ib[ic])->move=parms->move_a[j];
+src/pdb.c:			if (parms->debug>1)
+src/pdb.c:	CreateTopology(a,na,top,parms->tthresh,parms->debug);		// matrix indexed on structure atom_s
+src/pdb.c:			if (parms->debug>1) fprintf(stderr,"\tside of chain=%d back=%d atom=%d\n",ic,i,(((polymer+ic)->back)+i)->ia);
+src/pdb.c:						if (parms->debug>1)
+src/pdb.c:						if (parms->debug>1)
+src/pdb.c:						if (parms->debug>1)
+src/peptides.c:			else o = CheckOverlaps(p,u,parms,(*npol)+npep,parms->nosidechains,0);
+src/potential.c:                                    etot += EnergyPair(p,u,i,j,ci,cj,update,nosidechains,parms->disentangle,tooclose,parms->hb); 
+src/potential.c:      if (debug>0 && iproc==0) fprintf(parms->flog," Epairs = %lf\n",etot);
+src/potential.c:      if (!parms->noangpot || !parms->nodihpot){
+src/potential.c:                  if (!parms->noangpot)   eang += EnergyAngles(p,u,i,ci,update);                      // angular potential
+src/potential.c:                  if (!parms->nodihpot)   edih += EnergyDihedrals(p,u,i,ci,update);             // dihedral potential
+src/potential.c:      if (debug>0 && iproc==0) fprintf(parms->flog," Eang  = %lf\n Edih  = %lf\n Etot  = %lf\n",eang,edih,etot);
+src/potential.c:       if (strcmp(parms->op_minim,"none"))
+src/potential.c:                int i,tempncontacts,iback,ipol,icont,matcont[parms->npol];
+src/potential.c:                for(i=0;i<parms->npol;i++)
+src/potential.c:				for(ipol=0;ipol<parms->npol;ipol++)
+src/potential.c:				for(ipol=0;ipol<parms->npol;ipol++)
+src/potential.c:	for (ci=0;ci<parms->npol;ci++)
+src/potential.c:	for (ci=0;ci<parms->npol;ci++)
+src/potential.c:	for (ci=0;ci<parms->npol;ci++)
+src/potential.c:		for (cj=ci;cj<parms->npol;cj++)  
+src/potential.c:						if ( r2 < parms->r2shell ) AddShell(p,i,j,ci,cj);					// add to shell
+src/potential.c:							if ( r2 < parms->r2shell ) AddShell(p,i,j,ci,cj);			// add to shell
+src/potential.c:								if ( r2 < parms->r2shell ) AddShell(p,i,j,ci,cj);			// add to shell
+src/potential.c:								if ( r2 < parms->r2shell ) AddShell(p,i,j,ci,cj);			// add to shell
+src/potential.c:        for (ci=0;ci<parms->npol;ci++)
+src/potential.c:	for (ci=0;ci<parms->npol;ci++)
+src/potential.c:	for (ci=0;ci<parms->npol;ci++)
+src/potential.c:						//		fprintf(fproc,"OVER: move %d\n",parms->mov);	
+src/rotamers.c:		if (parms->debug>2) fprintf(stderr,"ic=%d\tiaa0=%d naa=%d\n",ic,iaa0,aamax+1);
+src/rotamers.c:		nat = AddDefaultCB(p,ic,N,CA,C,aamax+1,nat,parms->debug);
+src/rotamers.c:				if (parms->debug>1) fprintf(stderr,"Back=%3d\tchain=%d\taa=%s\t",i,ic,(((p+ic)->back)+i)->aa);
+src/rotamers.c:				if (rot_kind==-1 && parms->debug >1) fprintf(stderr,"  no rotamer");
+src/rotamers.c:				if (parms->debug>1) fprintf(stderr,"\tRotamer id is %d\n",rot_kind);
+src/rotamers.c:					if (parms->debug>1) fprintf(stderr,"\tAtom=%d (%d of %d)\tnside=%d",nat,is,(r+rot_kind)->nat,(((p+ic)->back)+i)->nside);
+src/rotamers.c:						if (parms->debug>1) fprintf(stderr,"\t\tirot=%d\tang=%lf dih=%lf r=%lf\n",irot,(*(((r+rot_kind)->atom)+irot)+is)->ang,
+src/rotamers.c:						if (parms->debug>1) fprintf(stderr,"\t\tA1=%s b1=%d\n",(*(((r+rot_kind)->atom)+irot)+is)->A1,b1);
+src/rotamers.c:						if (parms->debug>1) fprintf(stderr,"\t\tA2=%s b2=%d\n",(*(((r+rot_kind)->atom)+irot)+is)->A2,b2);
+src/rotamers.c:						if (parms->debug>1) fprintf(stderr,"\t\tA3=%s b3=%d\n",(*(((r+rot_kind)->atom)+irot)+is)->A3,b3);
+src/rotamers.c:						if (parms->debug>1) fprintf(stderr,"\t\ttype=%s\n",(((((p+ic)->back)+i)->side)+is+1)->type);
+src/rotamers.c:				if (parms->debug>1) fprintf(stderr,"\tnrot=%d\tnside=%d (rot id=%d)\n",(r+rot_kind)->nrot,(((p+ic)->back)+i)->nside,rot_kind );
+src/rotamers.c:	if (!parms->cb_pdb) SubstituteDefaultCB(p,nchains);
+src/rotamers.c:	if (parms->pdb_rot) keeppdb=1;
+src/rotamers.c:				if (parms->debug>1) fprintf(stderr,"Back=%3d\taa=%s\t",i,(((p+ic)->back)+i)->aa);
+src/rotamers.c:				if (rot_kind==-1 && parms->debug >1) fprintf(stderr,"  no rotamer");
+src/rotamers.c:				if (parms->debug>1 && (r+rot_kind)->nat >0) fprintf(stderr,"\tRotamer id is %d\n",rot_kind);
+src/rotamers.c:						//if (parms->debug>1) fprintf(stdout,"\tSide atom=%d (%d of %d)\tnside=%d",nat,j,(r+rot_kind)->nat,(((p+ic)->back)+i)->nside);
+src/rotamers.c:							if (parms->debug>1) fprintf(stderr,"\t\tirot=%d\tang=%lf dih=%lf r=%lf\n",irot+keeppdb,(*(((r+rot_kind)->atom)+irot+keeppdb)+iar)->ang,
+src/rotamers.c:							if (parms->debug>1) fprintf(stderr,"\t\tA1=%s b1=%d\n",(*(((r+rot_kind)->atom)+irot)+iar)->A1,b1);
+src/rotamers.c:							if (parms->debug>1) fprintf(stderr,"\t\tA2=%s b2=%d\n",(*(((r+rot_kind)->atom)+irot)+iar)->A2,b2);
+src/rotamers.c:							if (parms->debug>1) fprintf(stderr,"\t\tA3=%s b3=%d\n",(*(((r+rot_kind)->atom)+irot)+iar)->A3,b3);
+src/rotamers.c:				if (parms->debug>1) fprintf(stderr,"\tnrot=%d\tnside=%d (rot id=%d)\n",(((p+ic)->back)+i)->nrot,(((p+ic)->back)+i)->nside,rot_kind );
