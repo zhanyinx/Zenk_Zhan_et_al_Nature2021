@@ -1,7 +1,0 @@
-chr3R.17000000.20600000.inSilicoDecrease.BB0.5.pot	in silico reduction of HP1 bound beads in B compartments
-chr3R.17000000.20600000.optimal.HP1KD.pot	in silico optimased potential for HP1 starting from WT optimal potential, allowing only HP1 bound beads to change interaction energy
-chr3R.17000000.20600000.optimal.WT.pot	optimal potential for WT
-chrX.12000000.15800000.inSilicoDecrease.BB0.5.pot	in silico reduction of HP1 bound beads in B compartments
-chrX.12000000.15800000.optimal.HP1KD.pot	in silico optimased potential for HP1 starting from WT optimal potential, allowing only HP1 bound beads t
-o change interaction energy
-chrX.12000000.15800000.optimal.WT.pot	optimal potential for WT

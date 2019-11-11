@@ -116,7 +116,7 @@ for(i in 1:length(hiC_WT)){
   
   ##Ordering matrix based on increasing eigenvector
   norm_appo=norm
-  norm = norm[order(scoreWT),order(scoreWT)] 
+  norm = norm[order(compartmentsWT),order(compartmentsWT)] 
   colnames(norm)=as.character(1:ncol(norm))
   rownames(norm)=as.character(1:ncol(norm))
   
@@ -137,7 +137,7 @@ for(i in 1:length(hiC_WT)){
   #HP1 using WT eigenvector
   norm = intdata(normPerExpected(hiC_HP1[[i]], method="mean",logbin=TRUE))
   norm = norm[-colna,-colna]
-  if(length(scoreWT)!=nrow(norm)){
+  if(length(compartmentsWT)!=nrow(norm)){
     warning("dimension of a matrix in HP1 is different from WT! Removing the exceeding parts")
   }
   norm[is.na(norm)]=0
@@ -153,7 +153,7 @@ for(i in 1:length(hiC_WT)){
   
  
   norm_appo=norm
-  norm = norm[order(scoreWT),order(scoreWT)]
+  norm = norm[order(compartmentsWT),order(compartmentsWT)]
   if(nrow(norm)>=size){
     appo = cresize_nozeros(as.matrix(norm),size)
     if(contaHP1_WTComp==0){
