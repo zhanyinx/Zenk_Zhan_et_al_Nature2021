@@ -1,4 +1,3 @@
-
 library(HiTC)
 library(plot3D)
 library(RColorBrewer)
@@ -14,8 +13,8 @@ sourceCpp("RCPP_functions/vector_resize.cpp")
 
 ##global variables
 type = "HP1"
-dirHP1 <- "HP1/matrix/"  #directory containing Hi-C pro output matrix in the matrix format for HiTC 
-dirWT <- "WT/matrix/"  #directory containing Hi-C pro output matrix in the matrix format for HiTC 
+dirHP1 <- "utils/HP1/matrix/"  #directory containing Hi-C pro output matrix in the matrix format for HiTC (remember to remove centromeres)
+dirWT <- "utils/WT/matrix/"  #directory containing Hi-C pro output matrix in the matrix format for HiTC (remember to remove centromeres)
 exclude = c("chr4","chrY")
 size = 50 #rebinned matrix size
 limit=5000000 ##limit of distance where we do not use to calculate compscore and saddle plots
