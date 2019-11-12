@@ -1,3 +1,4 @@
 how to create matrix format for HiTC from HiC-Pro output matrix
 1) use hicpro2catch.sh to convert hicpro to catch format
 2) use catch2matrix.sh to convert catch to matrix format
+3) use remove_regions_from_HiC.sh to remove PCH regions
