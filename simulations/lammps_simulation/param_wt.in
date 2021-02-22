@@ -1,0 +1,87 @@
+# VARIABLES
+variable input index drosophila
+variable simname index out
+
+# Initialization
+units		lj 
+boundary	f f f
+atom_style	bond
+log 		log.txt
+read_data	${input}
+
+# Dreiding potential information
+neighbor	0.6 bin
+neigh_modify delay 0 every 1 check yes # technical tweaking
+bond_style harmonic
+bond_coeff 1 40.0 1.0
+
+pair_style	lj/cut 2.5
+#1 - A, active edge block
+#2 - B, inactive middle block
+#3 - Centromeric, telomeric regions
+#4 - Centromeric, telomeric regions, fixed points
+
+pair_coeff * * 0.15 1.0 2.5# default repulsion
+
+#definition of the groups
+group b_block type 1 # B-block
+group a_block type 2 # A-block
+group ct type 3
+group for_freeze type 4
+group rest subtract all for_freeze
+
+#confinement
+region myCyl cylinder z 23.6 23.6 23.6 0 94.41 side in
+fix wall1 a_block wall/region myCyl lj126 0.15 1.0 2.5
+fix wall2 b_block wall/region myCyl lj126 0.15 1.0 2.5
+fix wall3 ct wall/region myCyl lj126 0.33 1.0 2.5
+
+fix freeze for_freeze setforce 0.0 0.0 0.0
+#Minimization
+fix 1 rest nvt temp 1 1 0.1
+thermo 100000
+thermo_style custom step pe lx ly lz press pxx pyy pzz
+min_style cg
+minimize  0 1.0e-9 1000 10000
+unfix 1
+ 
+write_data 	after_minim.mpiio
+#####################################################
+# Equilibration (Langevin dynamics at 300 K)
+thermo_modify flush yes
+
+
+print "Seed: ${seed}"
+velocity rest create 1.0 ${seed} rot yes dist gaussian
+timestep 0.001
+
+fix 1 rest nvt temp 1.0 3.0 0.1 #0.1, otherwise the temperature fluctuates significantly
+fix 2 rest momentum 100 linear 1 1 1 angular
+
+restart 100000 old_tmp_rst new_tmp_rst
+thermo_style	custom step temp etotal evdwl
+run 10000000
+unfix 1
+fix 1 rest nvt temp 3.0 3.0 0.1
+run 100000000
+unfix 1
+fix 1 rest nvt temp 3.0 1.0 0.1
+pair_coeff 1 1  0.25  1.0	2.5 # A-A
+pair_coeff 2 2  0.315  1.0	2.5 # B-B
+pair_coeff 3 3  0.33  1.0	2.5 # centromere-telomere agregation
+pair_coeff 4 4  0.33  1.0	2.5 # centromere-telomere agregation
+pair_coeff 3 4  0.33  1.0	2.5 # centromere-telomere agregation
+pair_coeff 1 2  0.15  1.0	2.5 # A-B separation
+pair_coeff 1 3  0.15  1.0	2.5 # A-C separation
+pair_coeff 1 4  0.15  1.0	2.5 # A-C(f) separation
+pair_coeff 2 3  0.2  1.0	2.5 # B-C separation
+pair_coeff 2 4  0.2  1.0	2.5 # B-C(f) separation
+run 10000000
+unfix 1
+fix 1 rest nvt temp 1.0 1.0 0.1
+dump      1 all atom 1000000 1.lammpstrj
+run 1000100
+unfix 1
+write_data 	final_conf.mpiio
+
+print "All done"
