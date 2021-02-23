@@ -1,3 +1,8 @@
-# Zenk_HP1_Project
+This repository contains all the custom code used for Zenk_Zhan et al Nature 2021
 
-These is the repository for the publication Zenk, Zhan et al
+In particular, it contains
+
+- Code to make saddle plot
+- Code to call compartments locally
+- Input paramter files to perform genome wide and cis simulations
+- Macro to quantify microscopy data
