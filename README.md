@@ -1,4 +1,4 @@
-This repository contains all the custom code used for Zenk_Zhan et al Nature 2021
+This repository contains all the custom codes used for Zenk_Zhan et al Nature 2021
 
 In particular, it contains
 
